@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Adm{
+  id String @id @default(uuid())
+  nome String
+  email String
+  senha String
+
+  @@map("adms")
+}
+
+model Musico{
+  id String @id @default(uuid())
+  nome String 
+  email String
+  senha String
+
+  bandas Banda[]
+
+  @@map("musicos")
+}
+
+model Agendamento{
+  id String @id @default(uuid())
+  data String 
+  horario_para_chegar String
+  descricao String?
+  confirmacao Boolean @default(false)
+
+  bandas Banda[]
+
+  @@map("agendamentos")
+}
+
+model Banda{
+  id String @id @default(uuid())
+  id_musico String 
+  id_agendamento String
+
+  musico Musico @relation(fields: [id_musico], references: [id])
+  agendamento Agendamento @relation(fields: [id_agendamento], references: [id])
+
+  @@map("bandas")
+}
