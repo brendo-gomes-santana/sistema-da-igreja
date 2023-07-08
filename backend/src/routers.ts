@@ -15,6 +15,10 @@ import { TrocaDeInformacoesMusicoController } from "./controllers/musico/TrocaDe
 import { SessionMusicoController } from "./controllers/musico/SessionMusicoController";
 import { RemoveMusicoController } from "./controllers/musico/RemoveMusicoController";
 import { ListagemMusicoController } from "./controllers/musico/ListagemMusicoController";
+import { CreateAgendamentoController } from "./controllers/Agendamento/CreateAgendamentoController";
+import { RemoveAgendamentoController } from "./controllers/Agendamento/RemoveAgendamentoController";
+import { ListaAgendamentoController } from "./controllers/Agendamento/ListaAgendamentoController";
+import { atualizarAgendamentoController } from "./controllers/Agendamento/atualizarAgendamentoController";
 
 const rota = Router()
 
@@ -32,5 +36,11 @@ rota.post('/create/musico', IsAdm, new CreateMusicoController().create)
 rota.patch('/update/musico', new TrocaDeInformacoesMusicoController().update)
 rota.delete('/remove/musico', IsAdm, new RemoveMusicoController().handle)
 rota.get('/lista/musico', IsAdm, new ListagemMusicoController().show)
+
+// ROTAS DE AGENDAMENTOS
+rota.post('/create/agendamento', IsAdm, new CreateAgendamentoController().create)
+rota.delete('/remove/agendamento/:id', IsAdm, new RemoveAgendamentoController().remove)
+rota.get('/lista/agendamento', new ListaAgendamentoController().show)
+rota.patch('/atualizando/agendamento', IsAdm, new atualizarAgendamentoController().handle)
 
 export { rota }
