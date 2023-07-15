@@ -5,7 +5,11 @@ class ListaAgendamentoService{
 
         const lista = await prisma.agendamento.findMany({
             include: {
-                bandas:true
+                bandas: {
+                    include: {
+                        musico: true
+                    }
+                }
             }
         })
 

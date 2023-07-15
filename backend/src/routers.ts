@@ -19,6 +19,7 @@ import { CreateAgendamentoController } from "./controllers/Agendamento/CreateAge
 import { RemoveAgendamentoController } from "./controllers/Agendamento/RemoveAgendamentoController";
 import { ListaAgendamentoController } from "./controllers/Agendamento/ListaAgendamentoController";
 import { atualizarAgendamentoController } from "./controllers/Agendamento/atualizarAgendamentoController";
+import { CreateBandaController } from "./controllers/Banda/createBandaController";
 
 const rota = Router()
 
@@ -43,4 +44,6 @@ rota.delete('/remove/agendamento/:id', IsAdm, new RemoveAgendamentoController().
 rota.get('/lista/agendamento', new ListaAgendamentoController().show)
 rota.patch('/atualizando/agendamento', IsAdm, new atualizarAgendamentoController().handle)
 
+// ROTAS DE BANDA 
+rota.post('/create/banda', IsAdm, new CreateBandaController().create)
 export { rota }
