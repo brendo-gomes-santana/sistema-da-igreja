@@ -5,17 +5,17 @@ import { FaEyeSlash, FaEye } from 'react-icons/fa';
 
 import styles from './style.module.scss';
 
-export default function InputSenha() {
+export default function InputSenha({mostrarIcon,...rest}) {
 
     const [senhaAmostrar, setSenhaAmostrar] = useState(false)
 
     return (
-        <div className={styles.container}>
-            <RiLockPasswordFill /> 
-            <input type={senhaAmostrar ? 'text' : 'password'} />
+        <div className={styles.COntainerSenha}>
+            {mostrarIcon && <RiLockPasswordFill />} 
+            <input type={senhaAmostrar ? 'text' : 'password'} {...rest}/>
             <span
                 onClick={() => setSenhaAmostrar(!senhaAmostrar)}
-            >{senhaAmostrar ? <FaEye /> : <FaEyeSlash />}</span>
+            >{senhaAmostrar ? <FaEye size={30}/> : <FaEyeSlash size={30}/>}</span>
         </div>
     )
 }

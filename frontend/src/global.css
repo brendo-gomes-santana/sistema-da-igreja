@@ -17,4 +17,13 @@
 
     --verde-claro: #8DB989;
     --vermelho-claro: #B98989;
+    --cinza-claro: #F1EEEE;
+}
+
+input{
+    outline: none;
+}
+
+a{
+    text-decoration: none;
 }
