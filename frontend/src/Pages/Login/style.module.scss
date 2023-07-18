@@ -21,6 +21,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    a{
+        color: var(--roxo);
+        margin: 1rem 0;
+    }
 }
 .ContainerInput{
     width: 100%;
@@ -53,6 +57,7 @@
     }
 }
 .containerButton{
+    margin-top: 1.5rem;
     width: 100%;
     text-align: center;
     button{
