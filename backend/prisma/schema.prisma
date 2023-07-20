@@ -30,6 +30,19 @@ model Musico{
   @@map("musicos")
 }
 
+model Louvor{
+  id String @id @default(uuid())
+
+  nome String
+  link String?
+  tom String?
+  letra String?
+
+  louvorATocar LouvorATocar[]
+
+  @@map("louvoures")
+}
+
 model Agendamento{
   id String @id @default(uuid())
   data String 
@@ -38,6 +51,7 @@ model Agendamento{
   confirmacao Boolean @default(false)
 
   bandas Banda[]
+  louvorATocar LouvorATocar[]
 
   @@map("agendamentos")
 }
@@ -51,4 +65,14 @@ model Banda{
   agendamento Agendamento @relation(fields: [id_agendamento], references: [id])
 
   @@map("bandas")
+}
+
+model LouvorATocar{
+  id String @id @default(uuid())
+  id_louvor String
+  id_agendamento String
+
+  agendamento Agendamento @relation(fields: [id_agendamento], references: [id])
+  louvor Louvor @relation(fields: [id_louvor], references: [id])
+
 }

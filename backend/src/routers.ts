@@ -20,6 +20,9 @@ import { RemoveAgendamentoController } from "./controllers/Agendamento/RemoveAge
 import { ListaAgendamentoController } from "./controllers/Agendamento/ListaAgendamentoController";
 import { atualizarAgendamentoController } from "./controllers/Agendamento/atualizarAgendamentoController";
 import { CreateBandaController } from "./controllers/Banda/createBandaController";
+import { ListaBandaController } from "./controllers/Banda/ListaBandaController";
+import { RemoveBandaController } from "./controllers/Banda/RemovebandaController";
+import { detalheAgendamentoController } from "./controllers/Agendamento/detalheAgendamentoController";
 
 const rota = Router()
 
@@ -41,9 +44,15 @@ rota.get('/lista/musico', IsAdm, new ListagemMusicoController().show)
 // ROTAS DE AGENDAMENTOS
 rota.post('/create/agendamento', IsAdm, new CreateAgendamentoController().create)
 rota.delete('/remove/agendamento/:id', IsAdm, new RemoveAgendamentoController().remove)
-rota.get('/lista/agendamento', new ListaAgendamentoController().show)
+rota.get('/lista/agendamento', IsAdm, new ListaAgendamentoController().show)
+rota.get('/detalhe/agendamento', IsAdm, new detalheAgendamentoController().detalhe)
 rota.patch('/atualizando/agendamento', IsAdm, new atualizarAgendamentoController().handle)
 
 // ROTAS DE BANDA 
 rota.post('/create/banda', IsAdm, new CreateBandaController().create)
+rota.get('/lista/banda', IsAdm, new ListaBandaController().show)
+rota.delete('/remove/banda', IsAdm, new RemoveBandaController().remove)
+
+//ROTAS LOUVORES
+
 export { rota }
