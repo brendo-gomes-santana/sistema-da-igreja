@@ -7,20 +7,19 @@ class RemoveAgendamentoService{
             throw new Error('Informe id')
         }
 
-        const existeBanda = await prisma.banda.findMany({
-            where: { id_agendamento: id }
-        })
-        if(existeBanda){
+        //se existe banda, vai apagar
+        if(await prisma.banda.findMany({where: { id_agendamento: id }})){
             await prisma.banda.deleteMany({
                 where: { id_agendamento: id }
             })
         }
 
-        const existeAgendamento = await prisma.agendamento.findFirst({
-            where: { id }
-        })
+        //se existe louvores vai apagar
+        if(await prisma.louvorATocar.findMany({ where: { id_agendamento: id } })){
+            await prisma.louvorATocar.deleteMany({where: { id_agendamento: id }})
+        }
 
-        if(existeAgendamento){
+        if(await prisma.agendamento.findFirst({where: { id }})){
             const removido = await prisma.agendamento.delete({
                 where: { id }
             })

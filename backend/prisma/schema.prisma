@@ -48,6 +48,8 @@ model Agendamento{
   data String 
   horario_para_chegar String
   descricao String?
+  
+  status String
   confirmacao Boolean @default(false)
 
   bandas Banda[]

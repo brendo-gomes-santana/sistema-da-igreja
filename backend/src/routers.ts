@@ -23,6 +23,11 @@ import { CreateBandaController } from "./controllers/Banda/createBandaController
 import { ListaBandaController } from "./controllers/Banda/ListaBandaController";
 import { RemoveBandaController } from "./controllers/Banda/RemovebandaController";
 import { detalheAgendamentoController } from "./controllers/Agendamento/detalheAgendamentoController";
+import { CreateLouvorController } from "./controllers/Louvor/CreateLouvorController";
+import { RemoveLouvorController } from "./controllers/Louvor/RemoveLouvorController";
+import { ListaLouvorController } from "./controllers/Louvor/ListaLouvorController";
+import { DetalheLouvorController } from "./controllers/Louvor/DetalheLouvorController";
+import { atualizandoLouvorController } from "./controllers/Louvor/atualizandoLouvorController";
 
 const rota = Router()
 
@@ -45,7 +50,7 @@ rota.get('/lista/musico', IsAdm, new ListagemMusicoController().show)
 rota.post('/create/agendamento', IsAdm, new CreateAgendamentoController().create)
 rota.delete('/remove/agendamento/:id', IsAdm, new RemoveAgendamentoController().remove)
 rota.get('/lista/agendamento', IsAdm, new ListaAgendamentoController().show)
-rota.get('/detalhe/agendamento', IsAdm, new detalheAgendamentoController().detalhe)
+rota.get('/detalhe/agendamento', new detalheAgendamentoController().detalhe)
 rota.patch('/atualizando/agendamento', IsAdm, new atualizarAgendamentoController().handle)
 
 // ROTAS DE BANDA 
@@ -54,5 +59,10 @@ rota.get('/lista/banda', IsAdm, new ListaBandaController().show)
 rota.delete('/remove/banda', IsAdm, new RemoveBandaController().remove)
 
 //ROTAS LOUVORES
+rota.post('/create/louvor', IsAdm, new CreateLouvorController().create)
+rota.delete('/remove/louvor', IsAdm, new RemoveLouvorController().remove)
+rota.get('/lista/louvor', IsAdm, new ListaLouvorController().show)
+rota.get('/detalhe/louvor', new DetalheLouvorController().handle)
+rota.patch('/atualizando/louvor', new atualizandoLouvorController().handle)
 
 export { rota }

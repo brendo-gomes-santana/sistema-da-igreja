@@ -3,13 +3,14 @@ import prisma from '../../prisma';
 export interface CreateAgendamentoProps {
     data: string,
     horario_para_chegar: string,
+    status: string,
     descricao?: string
 }
 
 class CreateAgendamentoService{
-    async execute({data, horario_para_chegar, descricao}:CreateAgendamentoProps){
+    async execute({data, horario_para_chegar, descricao, status}:CreateAgendamentoProps){
         
-        if(!data || !horario_para_chegar){
+        if(!data || !horario_para_chegar || !status){
             throw new Error('Coloque a data e o horário')
         }
 
@@ -17,7 +18,8 @@ class CreateAgendamentoService{
             data: {
                 data,
                 horario_para_chegar,
-                descricao
+                status,
+                descricao,
             }
         })
 
