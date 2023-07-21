@@ -29,7 +29,10 @@ import { ListaLouvorController } from "./controllers/Louvor/ListaLouvorControlle
 import { DetalheLouvorController } from "./controllers/Louvor/DetalheLouvorController";
 import { atualizandoLouvorController } from "./controllers/Louvor/atualizandoLouvorController";
 import { createLouvorATocarController } from "./controllers/LouvorATocar/createLouvorATocarController";
-
+import { ListaLouvorATocarController } from "./controllers/LouvorATocar/ListaLouvorATocarController";
+import { RemoveLouvorATocarController } from "./controllers/LouvorATocar/RemoveLouvorATocarController";
+import { VerAgendarDoMusicoController } from "./controllers/musico/VerAgendarDoMusicoController";
+import { ConfirmacarBandaController } from "./controllers/Banda/ConfirmacarBandaController";
 const rota = Router()
 
 rota.use(apiKey)
@@ -46,10 +49,11 @@ rota.post('/create/musico', IsAdm, new CreateMusicoController().create)
 rota.patch('/update/musico', new TrocaDeInformacoesMusicoController().update)
 rota.delete('/remove/musico', IsAdm, new RemoveMusicoController().handle)
 rota.get('/lista/musico', IsAdm, new ListagemMusicoController().show)
+rota.get('/agendar/musico', new VerAgendarDoMusicoController().handle)
 
 // ROTAS DE AGENDAMENTOS
 rota.post('/create/agendamento', IsAdm, new CreateAgendamentoController().create)
-rota.delete('/remove/agendamento/:id', IsAdm, new RemoveAgendamentoController().remove)
+rota.delete('/remove/agendamento', IsAdm, new RemoveAgendamentoController().remove)
 rota.get('/lista/agendamento', IsAdm, new ListaAgendamentoController().show)
 rota.get('/detalhe/agendamento', new detalheAgendamentoController().detalhe)
 rota.patch('/atualizando/agendamento', IsAdm, new atualizarAgendamentoController().handle)
@@ -58,6 +62,7 @@ rota.patch('/atualizando/agendamento', IsAdm, new atualizarAgendamentoController
 rota.post('/create/banda', IsAdm, new CreateBandaController().create)
 rota.get('/lista/banda', IsAdm, new ListaBandaController().show)
 rota.delete('/remove/banda', IsAdm, new RemoveBandaController().remove)
+rota.patch('/atualizando/banda', IsAdm, new ConfirmacarBandaController().handle)
 
 //ROTAS LOUVORES
 rota.post('/create/louvor', IsAdm, new CreateLouvorController().create)
@@ -69,4 +74,7 @@ rota.patch('/atualizando/louvor', new atualizandoLouvorController().handle)
 
 //ROTAS LOUVORES A TOCAR
 rota.post('/create/agendamento/louvor', IsAdm, new createLouvorATocarController().handle)
+rota.get('/lista/agendamento/louvor', new ListaLouvorATocarController().handle)
+rota.delete('/remove/agendamento/louvor', IsAdm, new RemoveLouvorATocarController().delete)
+
 export { rota }

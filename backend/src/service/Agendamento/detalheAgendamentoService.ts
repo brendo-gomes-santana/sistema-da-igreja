@@ -9,23 +9,32 @@ class detalheAgendamentoService{
 
         const detalhe = await prisma.agendamento.findFirst({
             where: { id },
-            include: {
+            select: {
+                id:true,
+                data: true,
+                horario_para_chegar: true,
+                descricao:true,
+                status: true,
                 bandas: {
-                    include:{
+                    select: {
+                        id: true,
+                        confirmacao: true,
                         musico: {
                             select: {
                                 id:true,
-                                nome: true
+                                nome:true
                             }
                         }
                     }
                 },
                 louvorATocar: {
-                    include: {
+                    select: {
+                        id: true,
                         louvor: {
                             select: {
                                 id:true,
-                                nome: true
+                                nome:true,
+                                tom: true
                             }
                         }
                     }

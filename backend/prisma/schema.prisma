@@ -62,6 +62,8 @@ model Banda{
   id String @id @default(uuid())
   id_musico String 
   id_agendamento String
+  
+  confirmacao Boolean @default(false)
 
   musico Musico @relation(fields: [id_musico], references: [id])
   agendamento Agendamento @relation(fields: [id_agendamento], references: [id])

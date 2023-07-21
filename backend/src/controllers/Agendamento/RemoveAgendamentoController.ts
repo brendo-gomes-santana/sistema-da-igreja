@@ -5,7 +5,7 @@ import { RemoveAgendamentoService } from "../../service/Agendamento/RemoveAgenda
 class RemoveAgendamentoController{
     async remove(req: Request, res: Response){
 
-        const id = req.params.id as string
+        const id = req.query.id as string
         const inicializado = new RemoveAgendamentoService()
         const removido = await inicializado.execute(id)
         return res.json(removido)

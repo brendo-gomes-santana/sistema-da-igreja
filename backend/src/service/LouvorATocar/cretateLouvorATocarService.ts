@@ -26,6 +26,7 @@ class cretateLouvorATocarService {
                 id_louvor
             },
             select: {
+                id:true,
                 louvor: {
                     select: {
                         id: true,
@@ -34,6 +35,8 @@ class cretateLouvorATocarService {
                 }
             }
         })
+
+        return criado;
     }
 }
 
