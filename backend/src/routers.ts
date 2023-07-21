@@ -28,6 +28,7 @@ import { RemoveLouvorController } from "./controllers/Louvor/RemoveLouvorControl
 import { ListaLouvorController } from "./controllers/Louvor/ListaLouvorController";
 import { DetalheLouvorController } from "./controllers/Louvor/DetalheLouvorController";
 import { atualizandoLouvorController } from "./controllers/Louvor/atualizandoLouvorController";
+import { createLouvorATocarController } from "./controllers/LouvorATocar/createLouvorATocarController";
 
 const rota = Router()
 
@@ -65,4 +66,7 @@ rota.get('/lista/louvor', IsAdm, new ListaLouvorController().show)
 rota.get('/detalhe/louvor', new DetalheLouvorController().handle)
 rota.patch('/atualizando/louvor', new atualizandoLouvorController().handle)
 
+
+//ROTAS LOUVORES A TOCAR
+rota.post('/create/agendamento/louvor', IsAdm, new createLouvorATocarController().handle)
 export { rota }
