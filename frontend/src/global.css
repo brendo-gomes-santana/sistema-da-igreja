@@ -11,17 +11,21 @@
 
 :root {
     --fundo: #1B3358;
+    --segundo-fundo: #f5f5f5;
     --branco: #fff;
     --preto: #000;
     --roxo: #883781;
 
     --verde-claro: #8DB989;
+    --verde-mais-forte: #7bc26f;
     --vermelho-claro: #B98989;
     --cinza-claro: #F1EEEE;
     --cinza-100: #C8C8C8;
     --cinza-escuro: #9C9C9C;
 }
-
+body {
+    background-color: var(--segundo-fundo);
+}
 input{
     outline: none;
 }

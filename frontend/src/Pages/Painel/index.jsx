@@ -1,5 +1,5 @@
 import React from 'react'
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 
 import { PiUsersThreeFill } from 'react-icons/pi';
@@ -17,7 +17,6 @@ import api from '../../Service';
 export default function Painel() {
   const adm = JSON.parse(localStorage.getItem('@InforUser'))
   const navigate = useNavigate();
-  const queryClient = useQueryClient()
 
   //pegando a lista de agendamento
   const { data, isLoading, refetch } = useQuery('agendar', async () => {

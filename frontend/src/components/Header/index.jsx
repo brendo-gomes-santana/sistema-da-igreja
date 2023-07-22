@@ -16,7 +16,7 @@ export default function Header() {
                 <img src={require('../../imgs/logo.jpg')} alt="logo" />
             </div>
             <nav className={styles.nav}>
-                <Link className={styles.linkhome}>Painel</Link>
+                <Link className={styles.linkhome} to='/painel'>Painel</Link>
                 <div className={styles.base}>
                     <button onClick={() => abrir !== 1 ? setAbrir(1) : setAbrir(0)}
                         className={styles.link}>
@@ -27,8 +27,8 @@ export default function Header() {
                         animate={abrir === 1 ? 'aberto' : 'fechado'}
                         className={styles.baseLink}
                     >
-                        <Link>Cadastrar de musico</Link>
-                        <Link>Lista de musicos</Link>
+                        <Link to='/criar/musico'>Cadastrar de musico</Link>
+                        <Link to='/lista/musico'>Lista de musicos</Link>
                     </motion.div>
                 </div>
                 <div className={styles.base}>
@@ -41,8 +41,8 @@ export default function Header() {
                         animate={abrir === 2 ? 'aberto' : 'fechado'}
                         className={styles.baseLink}
                     >
-                        <Link>Cadastrar de louvor</Link>
-                        <Link>Lista de Louvores</Link>
+                        <Link to='/criar/louvor'>Cadastrar de louvor</Link>
+                        <Link to='/lista/louvor'>Lista de Louvores</Link>
                     </motion.div>
                 </div>
                 <div className={styles.base}>
