@@ -1,10 +1,12 @@
 import React from 'react'
 import { AiFillDelete } from 'react-icons/ai';
 import { useQuery, useMutation } from 'react-query';
+import { motion } from 'framer-motion';
 
 import Header from '../../components/Header';
 import styles from './styles.module.scss';
 import api from '../../Service';
+
 export default function ListaMusico() {
 
     const adm = JSON.parse(localStorage.getItem('@InforUser'))
@@ -19,7 +21,7 @@ export default function ListaMusico() {
     })
 
     const deleta = useMutation({
-        mutationFn: async ({id}) => {
+        mutationFn: async ({ id }) => {
             return api.delete('/remove/musico', {
                 params: {
                     api_key: 'SistemaDaIgreja',
@@ -49,10 +51,15 @@ export default function ListaMusico() {
                 )}
                 {data?.map((musico) => {
                     return (
-                        <article className={styles.lista} key={musico.id}>
+                        <motion.article
+                            className={styles.lista} 
+                            key={musico.id}
+                            initial={{ y: 50, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            >
                             <p>{musico.nome}</p>
-                            <AiFillDelete onClick={ () => deleta.mutate({id: musico.id}) } />
-                        </article>
+                            <AiFillDelete onClick={() => deleta.mutate({ id: musico.id })} />
+                        </motion.article>
                     )
                 })}
 

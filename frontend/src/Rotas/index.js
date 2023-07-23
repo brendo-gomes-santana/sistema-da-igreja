@@ -6,6 +6,7 @@ import CriarMusica from '../Pages/CriarMusico';
 import ListaMusico from '../Pages/ListaMusico';
 import CriarLouvor from '../Pages/CriarLouvor';
 import ListaLouvores from '../Pages/ListaLouvores';
+import DetalheLouvor from '../Pages/DetalheLouvor';
 
 import Privida from './Privida';
 import Auth from '../contexts/Auth';
@@ -21,6 +22,7 @@ export default function Rotas() {
           <Route path='/lista/musico' element={ <Privida> <ListaMusico/> </Privida> }/>
           <Route path='/criar/louvor' element={ <Privida> <CriarLouvor/> </Privida> } />
           <Route path='/lista/louvor' element={ <Privida> <ListaLouvores/> </Privida> }/>
+          <Route path='/:seguranca/detalhe/louvor/:id' element={ <Privida> <DetalheLouvor/> </Privida> }/>
         </Routes>
       </Auth>
     </Router>

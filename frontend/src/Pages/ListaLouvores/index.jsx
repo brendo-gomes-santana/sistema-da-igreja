@@ -3,6 +3,7 @@ import { useQuery, useMutation } from 'react-query';
 import { AiFillDelete } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { FaEye } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 
 import styles from './styles.module.scss';
 import Header from '../../components/Header';
@@ -48,16 +49,20 @@ export default function ListaLouvores() {
                 )}
                 {data?.map((louvor) => {
                     return (
-                        <article className={styles.lista} key={louvor.id}>
+                        <motion.article 
+                        className={styles.lista} 
+                        key={louvor.id}
+                        initial={{y: 10, opacity: 0}}
+                        animate={{y: 0, opacity: 1}}>
                             <p>{louvor.nome}</p>
                             <span> {louvor.tom === '' ? 'tom não informado' : louvor.tom}</span>
                             <div className={styles.containerIcon}>
-                                <Link>
+                                <Link to={`/adm/detalhe/louvor/${louvor.id}`} >
                                     <FaEye />
                                 </Link>
                                 <AiFillDelete onClick={ () => deletaLouvor.mutate({id: louvor.id})} />
                             </div>
-                        </article>
+                        </motion.article>
                     )
                 })}
 
