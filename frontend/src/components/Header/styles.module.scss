@@ -39,8 +39,12 @@
     flex-direction: column;
     padding: 0 0.5rem;
 
-    a{
+    a, button{
         color: var(--branco);
-        font-size: 20px
+        border: none;
+        background-color: transparent;
+        text-align: left;
+        font-size: 20px;
+        cursor: pointer;
     }
 }

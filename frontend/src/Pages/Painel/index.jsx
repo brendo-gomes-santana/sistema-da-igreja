@@ -10,6 +10,8 @@ import { FaEye } from 'react-icons/fa';
 import { AiFillDelete } from 'react-icons/ai';
 import { BiSolidMessageSquareEdit } from 'react-icons/bi';
 
+import { format } from 'date-fns';
+
 import Header from '../../components/Header';
 import styles from './styles.module.scss';
 import api from '../../Service';
@@ -59,6 +61,11 @@ export default function Painel() {
       refetch()
     }
   })
+
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    return format(date, 'dd/MM/yyyy');
+  }
   return (
     <>
       <Header />
@@ -76,7 +83,7 @@ export default function Painel() {
           </div>
           <div>
             <BsCalendar2Check size={105} />
-            <span>{data?.length}</span>
+            <span>{data?.filter(i => i.confirmacao === true).length}</span>
             <p>Q. de Eventos Agendado</p>
           </div>
           <div>
@@ -102,8 +109,8 @@ export default function Painel() {
                   backgroundColor: agendar.confirmacao ? 'var(--verde-claro)' : 'var(--vermelho-claro)'
                 }} >{agendar.confirmacao ? 'Ativo' : 'Pendente'}</span>
                 <p>{agendar.status}</p>
-                <p>{agendar.data}</p>
-                <p>{agendar.horario_para_chegar}</p>
+                <p> {formatDate(agendar.data)}</p>
+                <p>{agendar.horario_para_chegar}h</p>
                 <div className={styles.boxIcon}>
                   <FaEye onClick={ () => navigate(`/detalhe/agendamento/${agendar.id}`) }/>
                   <BiSolidMessageSquareEdit />

@@ -24,3 +24,11 @@ export const nota = [
     { id: 23, tom: 'Gm' },
     { id: 24, tom: 'Abm' }
 ]
+
+export const status = [
+    { id: 1, s: 'Culto' },
+    { id: 2, s: 'Reunião de Discipulado' },
+    { id: 3, s: 'OnFire' },
+    { id: 4, s: 'Ensaio' },
+    { id: 5, s: 'Evento' },
+]

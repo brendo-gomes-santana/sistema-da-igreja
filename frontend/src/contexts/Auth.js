@@ -31,10 +31,14 @@ export default function Auth({children}) {
       alert(err.response.data.error)
     }
   })
-
+  function deslogar (){
+    localStorage.clear()
+    navigata('/')
+  }
   return (
     <AuthContext.Provider value={{
       Login,
+      deslogar,
       carregandoSession: Login.isLoading 
     }}>
       {children}

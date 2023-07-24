@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 
 import { Link } from 'react-router-dom';
 import { TfiArrowCircleUp } from 'react-icons/tfi';
@@ -7,9 +7,11 @@ import { motion } from 'framer-motion'
 import { button } from './animacao';
 
 import styles from './styles.module.scss';
-
+import { AuthContext } from '../../contexts/Auth';
 export default function Header() {
     const [abrir, setAbrir] = useState(0)
+    const { deslogar } = useContext(AuthContext)
+
     return (
         <header className={styles.header}>
             <div className={styles.baseImg}>
@@ -56,7 +58,7 @@ export default function Header() {
                         className={styles.baseLink}
                     >
                         <Link>Usuário</Link>
-                        <Link>Sair</Link>
+                        <button onClick={ () => deslogar() } >Sair</button>
                     </motion.div>
                 </div>
             </nav>
