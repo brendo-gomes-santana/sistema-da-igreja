@@ -4,7 +4,7 @@ import styles from './styles.module.scss';
 
 import Header from '../../components/Header';
 import api from '../../Service';
-
+import { nota } from '../../Data';
 export default function CriarLouvor() {
     const adm = JSON.parse(localStorage.getItem('@InforUser'))
 
@@ -56,9 +56,11 @@ export default function CriarLouvor() {
                         <label>Tom..: </label>
                         <select value={tom} onChange={v => setTom(v.target.value)}>
                             <option>Selecione - não é obrigatório</option>
-                            <option value="E">E</option>
-                            <option value="A">A</option>
-                            <option value="C">C</option>
+                            {nota.map((i) => {
+                                return(
+                                    <option key={i.id} value={i.tom}>{i.tom}</option>
+                                )
+                            })}
                         </select>
                     </div>
                     <div className={styles.BoxInput}>

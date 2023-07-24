@@ -7,7 +7,7 @@ import ListaMusico from '../Pages/ListaMusico';
 import CriarLouvor from '../Pages/CriarLouvor';
 import ListaLouvores from '../Pages/ListaLouvores';
 import DetalheLouvor from '../Pages/DetalheLouvor';
-
+import NovoEvento from '../Pages/NovoEvento';
 import Privida from './Privida';
 import Auth from '../contexts/Auth';
 
@@ -23,6 +23,7 @@ export default function Rotas() {
           <Route path='/criar/louvor' element={ <Privida> <CriarLouvor/> </Privida> } />
           <Route path='/lista/louvor' element={ <Privida> <ListaLouvores/> </Privida> }/>
           <Route path='/:seguranca/detalhe/louvor/:id' element={ <Privida> <DetalheLouvor/> </Privida> }/>
+          <Route path='/criar/evento' element={<Privida> <NovoEvento/> </Privida> }/>
         </Routes>
       </Auth>
     </Router>

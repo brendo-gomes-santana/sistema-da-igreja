@@ -5,7 +5,7 @@ import { useParams, Navigate, Link } from 'react-router-dom';
 import api from '../../Service';
 import Header from '../../components/Header';
 import styles from './styles.module.scss';
-
+import { nota } from '../../Data';
 export default function DetalheLouvor() {
     const adm = JSON.parse(localStorage.getItem('@InforUser'))
     const { id, seguranca } = useParams()
@@ -83,12 +83,17 @@ export default function DetalheLouvor() {
                             <label>Tom:</label>
                             <select disabled={alterar} value={tom} onChange={v => setTom(v.target.value)}>
                                 <option>{data.tom}</option>
+                                {nota.map((i) => {
+                                    return(
+                                        <option key={i.id} value={i.tom}>{i.tom}</option>
+                                    )
+                                })}
                             </select>
                         </div>
                         {seguranca === 'adm' && (
                             !alterar ? (
                                 <div>
-                                    <button type='submit'>Salvar
+                                    <button type='submit'>{alterarInformacao.isLoading ? 'Carregando...' : 'Salvar'}
                                     </button>
                                     <button onClick={() => setAlterar(true)}
                                         style={{ backgroundColor: 'var(--vermelho-claro)' }}

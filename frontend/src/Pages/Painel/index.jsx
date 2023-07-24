@@ -1,6 +1,6 @@
 import React from 'react'
 import { useMutation, useQuery } from 'react-query';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import { PiUsersThreeFill } from 'react-icons/pi';
 import { BsCalendar2Check } from 'react-icons/bs';
@@ -88,7 +88,7 @@ export default function Painel() {
 
         <article className={styles.ContainerCriarAgendamento}>
           <h2>Agendamento</h2>
-          <button>Cadastrar Evento</button>
+          <Link to='/criar/evento'>Cadastrar Evento</Link>
         </article>
 
         <article className={styles.continerAgendamento}>

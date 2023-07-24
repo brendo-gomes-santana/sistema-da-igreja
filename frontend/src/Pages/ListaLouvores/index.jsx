@@ -8,6 +8,7 @@ import { motion } from 'framer-motion';
 import styles from './styles.module.scss';
 import Header from '../../components/Header';
 import api from '../../Service';
+
 export default function ListaLouvores() {
     const adm = JSON.parse(localStorage.getItem('@InforUser'))
 
