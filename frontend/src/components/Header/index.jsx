@@ -15,7 +15,7 @@ export default function Header() {
     return (
         <header className={styles.header}>
             <div className={styles.baseImg}>
-                <img src={require('../../imgs/logo.jpg')} alt="logo" />
+                <img src={require('../../imgs/logo.png')} alt="logo" />
             </div>
             <nav className={styles.nav}>
                 <Link className={styles.linkhome} to='/painel'>Painel</Link>
