@@ -9,6 +9,8 @@ import { button } from './animacao';
 import styles from './styles.module.scss';
 import { AuthContext } from '../../contexts/Auth';
 export default function Header() {
+    const adm = JSON.parse(localStorage.getItem('@InforUser'))
+
     const [abrir, setAbrir] = useState(0)
     const { deslogar } = useContext(AuthContext)
 
@@ -57,7 +59,7 @@ export default function Header() {
                         animate={abrir === 3 ? 'aberto' : 'fechado'}
                         className={styles.baseLink}
                     >
-                        <Link>Usuário</Link>
+                        <Link to={`/usuario/${adm.id}`}>Usuário</Link>
                         <button onClick={ () => deslogar() } >Sair</button>
                     </motion.div>
                 </div>
