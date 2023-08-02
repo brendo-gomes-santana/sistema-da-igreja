@@ -15,6 +15,7 @@ import { format } from 'date-fns';
 import Header from '../../components/Header';
 import styles from './styles.module.scss';
 import api from '../../Service';
+import Loading from '../../components/Loading';
 
 export default function Painel() {
   const adm = JSON.parse(localStorage.getItem('@InforUser'))
@@ -65,6 +66,11 @@ export default function Painel() {
   function formatDate(dateString) {
     const date = new Date(dateString);
     return format(date, 'dd/MM/yyyy');
+  }
+  if(isLoading){
+    return(
+      <Loading/>
+    )
   }
   return (
     <>

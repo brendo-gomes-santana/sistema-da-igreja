@@ -4,11 +4,11 @@ import { AtualizarAdmProps, TrocaDeInformacoesDoAdmService } from "../../service
 
 class TrocaInformacoesAdmController{
     async atualizar(req: Request, res: Response){
-        const { id_adm, nome, email, senha } = req.body as AtualizarAdmProps;
+        const { id, nome, email, senha } = req.body as AtualizarAdmProps;
 
         const inicializacao = new TrocaDeInformacoesDoAdmService()
         const atualizando = await inicializacao.execute({
-            id_adm,
+            id,
             nome,
             email,
             senha
