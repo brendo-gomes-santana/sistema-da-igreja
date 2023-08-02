@@ -70,7 +70,7 @@ export default function DetalheLouvor() {
      }
     return (
         <>
-            <Header />
+            <Header administrador={seguranca === 'adm' ? true : false} />
             <section className={styles.container}>
                 <article className={styles.title}>
                     <Link to='/lista/louvor'>Volta</Link>

@@ -40,7 +40,7 @@ export default function CriarLouvor() {
     })
     return (
         <>
-            <Header />
+            <Header administrador={true} />
             <section className={styles.container}>
                 <article className={styles.title}>
                     <h1>Novo Louvor</h1>

@@ -35,7 +35,7 @@ export default function CriarMusica() {
     }
     return (
         <>
-            <Header />
+            <Header administrador={true}/>
             <section className={styles.container}>
                 <article className={styles.title}>
                     <h1>Novo Músico</h1>

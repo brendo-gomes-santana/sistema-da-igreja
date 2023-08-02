@@ -68,7 +68,7 @@ export default function Painel() {
   }
   return (
     <>
-      <Header />
+      <Header administrador={true}/>
       <section className={styles.container}>
 
         <article className={styles.title}>

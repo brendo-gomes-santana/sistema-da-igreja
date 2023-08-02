@@ -62,7 +62,7 @@ export default function NovoEvento() {
     }
     return (
         <>
-            <Header />
+            <Header administrador={true} />
             <section className={styles.container}>
                 <article className={styles.title}>
                     <Link to='/painel'>Volta</Link>

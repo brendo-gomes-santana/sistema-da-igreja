@@ -37,7 +37,7 @@ export default function ListaMusico() {
 
     return (
         <>
-            <Header />
+            <Header administrador={true}/>
             <section className={styles.container}>
                 <article className={styles.title}>
                     <h1>Lista de Músicos</h1>
