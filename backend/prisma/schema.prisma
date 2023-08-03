@@ -24,6 +24,8 @@ model Musico{
   nome String 
   email String
   senha String
+  
+  tipo String?
 
   bandas Banda[]
 

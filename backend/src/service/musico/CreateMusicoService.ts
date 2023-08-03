@@ -7,12 +7,13 @@ dotenv.config()
 export interface CreateMusicoProps{
     nome: string,
     email: string,
+    tipo: string,
 }
 
 
 class CreateMusicoService{
-    async execute({ nome, email }:CreateMusicoProps){
-        if(!nome || !email){
+    async execute({ nome, email, tipo }:CreateMusicoProps){
+        if(!nome || !email || !tipo){
             throw new Error('Preenchar todos os campos')
         }
         const existeMusico = await prisma.musico.findFirst({
@@ -27,6 +28,7 @@ class CreateMusicoService{
             data: {
                 nome, 
                 email, 
+                tipo,
                 senha: await hash(process.env.SENHAMUSICO as string ,10)
             }
         })

@@ -59,8 +59,8 @@ export default function Usuario() {
           seguranca === "adm" ? "/update/adm" : "/update/musico",
           {
             id: id,
-            nome: nome !== '' ? nome : undefined,
-            email: email !== '' ? email : undefined,
+            nome: nome !== "" ? nome : undefined,
+            email: email !== "" ? email : undefined,
           },
           {
             params: {
@@ -70,13 +70,14 @@ export default function Usuario() {
         )
         .then((r) => r.data);
     },
-    onSuccess: (data) => {
-      setAlterar(false)
-      setNome('')
-      setEmail('')
-      refetch()
+    onSuccess: () => {
+      setAlterar(false);
+      setNome("");
+      setEmail("");
+      refetch();
     },
   });
+
   async function alterarInformacao(e) {
     e.preventDefault();
 
@@ -87,7 +88,7 @@ export default function Usuario() {
         return alert("As Senhas não batem");
       }
     } else {
-        return AlterarNomeEEmail.mutate({nome: nome, email: email})
+      return AlterarNomeEEmail.mutate({ nome: nome, email: email });
     }
   }
 
@@ -101,11 +102,7 @@ export default function Usuario() {
         <article className={styles.title}>
           <h1>Configuração</h1>
         </article>
-
-        {!alterar && (
-          <button onClick={() => setAlterar(true)}>Alterar Informação</button>
-        )}
-        <form onSubmit={alterarInformacao}>
+        <form onSubmit={alterarInformacao} className={styles.formNomeEEmail}>
           <div className={styles.baseInput}>
             <label htmlFor="">Nome: </label>
             <input
@@ -129,13 +126,35 @@ export default function Usuario() {
 
           {alterar && (
             <div className={styles.baseButton}>
-              <span onClick={() => setAlterar(false)}>Cancela</span>
-              <button type="submit">Salvar</button>
+              <button
+                type="submit"
+                style={{ backgroundColor: "var(--verde-claro)" }}
+              >
+                Salvar
+              </button>
+              <span
+                onClick={() => setAlterar(false)}
+                style={{ backgroundColor: "var(--vermelho-claro)" }}
+              >
+                Cancela
+              </span>
             </div>
           )}
         </form>
-
-        <button onClick={() => setNovaSenha(true)}>Alterar Senha</button>
+        {!alterar && (
+          <button
+            onClick={() => setAlterar(true)}
+            className={styles.alterarSenhaEInformacaoButton}
+          >
+            Alterar Informação
+          </button>
+        )}
+        <button
+          onClick={() => setNovaSenha(true)}
+          className={styles.alterarSenhaEInformacaoButton}
+        >
+          Alterar Senha
+        </button>
 
         <motion.article
           initial={{ y: -1000 }}

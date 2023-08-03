@@ -2,10 +2,12 @@ import {Request, Response } from "express";
 import { ListagemMusicoService } from "../../service/musico/ListagemMusicoService";
 
 class ListagemMusicoController{
-    async show(_: Request ,res:Response){
+    async show(req: Request ,res:Response){
+
+        const { nome } = req.body
 
         const inicializacao = new ListagemMusicoService()
-        const lista = await inicializacao.execute()
+        const lista = await inicializacao.execute(nome)
 
         return res.json(lista)
 

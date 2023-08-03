@@ -5,12 +5,13 @@ import { CreateMusicoProps, CreateMusicoService } from "../../service/musico/Cre
 class CreateMusicoController{
     async create(req: Request, res:Response){
 
-        const { nome, email } = req.body as CreateMusicoProps
+        const { nome, email, tipo } = req.body as CreateMusicoProps
 
         const inicializacao = new CreateMusicoService()
         const criadoMusico = await inicializacao.execute({
             nome,
             email,
+            tipo
         })
 
         return res.json(criadoMusico)
