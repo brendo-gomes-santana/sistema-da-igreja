@@ -4,10 +4,10 @@ import { ListagemMusicoService } from "../../service/musico/ListagemMusicoServic
 class ListagemMusicoController{
     async show(req: Request ,res:Response){
 
-        const { nome } = req.body
+        const { nome, tipo } = req.body
 
         const inicializacao = new ListagemMusicoService()
-        const lista = await inicializacao.execute(nome)
+        const lista = await inicializacao.execute(nome, tipo)
 
         return res.json(lista)
 

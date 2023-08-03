@@ -9,7 +9,7 @@ import ListaLouvores from '../Pages/ListaLouvores';
 import DetalheLouvor from '../Pages/DetalheLouvor';
 import NovoEvento from '../Pages/NovoEvento';
 import Usuario from '../Pages/Usuario';
-
+import NovoEvento2 from '../Pages/NovoEvento_2';
 import Privida from './Privida';
 import Auth from '../contexts/Auth';
 
@@ -27,6 +27,7 @@ export default function Rotas() {
           <Route path='/:seguranca/detalhe/louvor/:id' element={ <Privida> <DetalheLouvor/> </Privida> }/>
           <Route path='/criar/evento' element={<Privida> <NovoEvento/> </Privida> }/>
           <Route path='/usuario/:seguranca/:id' element={ <Privida> <Usuario/> </Privida> }/>
+          <Route path='/criar/evento/2/:id_agendamento' element={ <Privida> <NovoEvento2/> </Privida> }/>
         </Routes>
       </Auth>
     </Router>

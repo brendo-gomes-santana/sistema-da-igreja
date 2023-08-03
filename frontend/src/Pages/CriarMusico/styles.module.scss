@@ -21,7 +21,7 @@
 .form{
     width: 100%;
     max-width: 672px;
-    height: 305px;
+    height: 320px;
     border: 5px solid var(--fundo);
     border-radius: 63px;
 
@@ -35,7 +35,7 @@
     button{
         position: absolute;
         right: 10%;
-        bottom: 10%;
+        bottom: 5%;
         width: 151px;
         height: 37px;
         border: none;
@@ -54,7 +54,7 @@
     label{
         font-size: 23px;
     }
-    input{
+    input, select{
         width: 100%;
         max-width: 509px;
         height: 50px;

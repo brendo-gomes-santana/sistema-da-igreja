@@ -11,12 +11,14 @@ export default function CriarMusica() {
 
     const [nome, setNome] = useState('')
     const [email, setEmail] = useState('')
+    const [tipo, setTipo] = useState(null)
 
     const cadastrar = useMutation({
-        mutationFn: async ({ nome, email }) => {
+        mutationFn: async ({ nome, email, tipo }) => {
             return api.post('/create/musico', {
                 nome,
-                email
+                email,
+                tipo
             }, {
                 params: {
                     id_adm: adm.id,
@@ -27,11 +29,16 @@ export default function CriarMusica() {
         onSuccess: () => {
             setEmail('')
             setNome('')
+            setTipo('')
         }
     })
     async function handleCadastrarMusico(e) {
         e.preventDefault();
-        cadastrar.mutate({ nome: nome, email: email })
+        if(!nome || !email || !tipo){
+            return alert('Preenchar todo os campos')
+        }
+
+        cadastrar.mutate({ nome: nome, email: email, tipo: tipo })
     }
     return (
         <>
@@ -51,6 +58,15 @@ export default function CriarMusica() {
                         <label>E-mail: </label>
                         <input type="email" placeholder='Digite o email'
                             value={email} onChange={v => setEmail(v.target.value)} />
+                    </div>
+                    <div className={styles.baseInput}>
+                        <label>Tipo...: </label>
+                        <select value={ tipo } onChange={ v => setTipo(v.target.value)}>
+                            <option value={null}>Selecione o modelo</option>
+                            <option value='On Fire'>On fire</option>
+                            <option value='Geral'>Geral</option>
+
+                        </select>
                     </div>
                     <button type='submit'> {cadastrar.isLoading ?
                         ('carregando...')

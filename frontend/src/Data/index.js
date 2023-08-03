@@ -32,3 +32,8 @@ export const status = [
     { id: 4, s: 'Ensaio' },
     { id: 5, s: 'Evento' },
 ]
+
+export const tipo = [
+    {id: 1, t: 'Geral'},
+    {id: 2, t: 'Onfire'},
+]
