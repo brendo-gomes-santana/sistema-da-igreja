@@ -48,7 +48,7 @@ rota.get('/infor/adm', new InformacoesAdmController().handle)
 rota.post('/create/musico', IsAdm, new CreateMusicoController().create)
 rota.patch('/update/musico', new TrocaDeInformacoesMusicoController().update)
 rota.delete('/remove/musico', IsAdm, new RemoveMusicoController().handle)
-rota.get('/lista/musico', IsAdm, new ListagemMusicoController().show)
+rota.post('/lista/musico', IsAdm, new ListagemMusicoController().show)
 rota.get('/agendar/musico', new VerAgendarDoMusicoController().handle)
 
 // ROTAS DE AGENDAMENTOS
