@@ -27,10 +27,11 @@ export default function Rotas() {
           <Route path='/criar/louvor' element={ <Privida> <CriarLouvor/> </Privida> } />
           <Route path='/lista/louvor' element={ <Privida> <ListaLouvores/> </Privida> }/>
           <Route path='/:seguranca/detalhe/louvor/:id' element={ <Privida> <DetalheLouvor/> </Privida> }/>
-          <Route path='/criar/evento' element={<Privida> <NovoEvento/> </Privida> }/>
           <Route path='/usuario/:seguranca/:id' element={ <Privida> <Usuario/> </Privida> }/>
+          <Route path='/criar/evento' element={<Privida> <NovoEvento/> </Privida> }/>
           <Route path='/criar/evento/2/:id_agendamento' element={ <Privida> <NovoEvento2/> </Privida> }/>
           <Route path='/criar/evento/3/:id_agendamento' element={ <Privida> <NovoEvento3/> </Privida> }/>
+          <Route path='/:seguranca/detalhe/agendamento/:id_agendamento' element={ <Privida> <NovoEvento3/> </Privida> }/>
         </Routes>
       </Auth>
     </Router>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useQuery, useMutation } from "react-query";
 import { AiOutlineLoading3Quarters, AiFillDelete } from "react-icons/ai";
 import { motion } from "framer-motion";
@@ -86,9 +86,10 @@ export default function NovoEvento3() {
           <h1>Novo Evento</h1>
         </article>
 
-        <form>
+        <form className={styles.form}>
           <label>Selecione os louvores: </label>
           <select
+            disabled={handleCadastrarLouvoresATocar.isLoading}
             value={idLouvor}
             onChange={(v) => setIdLouvor(v.target.value)}
           >
@@ -104,19 +105,26 @@ export default function NovoEvento3() {
             })}
           </select>
           <button
+            disabled={handleCadastrarLouvoresATocar.isLoading}
             onClick={(e) => {
               e.preventDefault();
               handleCadastrarLouvoresATocar.mutate({ louvor: idLouvor });
             }}
           >
-            Cadastrar
+            {handleCadastrarLouvoresATocar.isLoading
+              ? "Carregando..."
+              : "Cadastrar"}
           </button>
         </form>
 
-        <article>
+        <article className={styles.lista}>
+          <Link>Proximo</Link>
+          {louvoresATocar?.length === 0 && (
+            <p>Não é obrigatório selecionar os louvores agora.</p>
+          )}
           {louvoresATocar?.map((louvor) => {
             return (
-              <div>
+              <div className={styles.box}>
                 <p>{louvor.louvor.nome}</p>
                 {louvor.id === loading ? (
                   <motion.div
