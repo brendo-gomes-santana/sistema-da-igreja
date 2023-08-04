@@ -12,7 +12,7 @@ export default function ListaMusico() {
     const adm = JSON.parse(localStorage.getItem('@InforUser'))
 
     const { data, isLoading, refetch } = useQuery('lista-musicos', async () => {
-        return api.get('/lista/musico', {
+        return api.post('/lista/musico', {}, {
             params: {
                 api_key: 'SistemaDaIgreja',
                 id_adm: adm.id

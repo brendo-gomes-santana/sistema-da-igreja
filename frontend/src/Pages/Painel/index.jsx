@@ -49,7 +49,7 @@ export default function Painel() {
   })
 
   const deleteAgendamento = useMutation({
-    mutationFn: ({id}) => {
+    mutationFn: async ({id}) => {
       return api.delete('/remove/agendamento', {
         params: {
           id_adm: adm.id,
@@ -118,7 +118,7 @@ export default function Painel() {
                 <p> {formatDate(agendar.data)}</p>
                 <p>{agendar.horario_para_chegar}h</p>
                 <div className={styles.boxIcon}>
-                  <FaEye onClick={ () => navigate(`/detalhe/agendamento/${agendar.id}`) }/>
+                  <FaEye onClick={ () => navigate(`/adm/detalhe/agendamento/${agendar.id}`) }/>
                   <BiSolidMessageSquareEdit />
                   <AiFillDelete onClick={ () => deleteAgendamento.mutate({id: agendar.id}) }/>
                 </div>

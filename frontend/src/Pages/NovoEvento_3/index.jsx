@@ -118,7 +118,7 @@ export default function NovoEvento3() {
         </form>
 
         <article className={styles.lista}>
-          <Link>Proximo</Link>
+          <Link to={`/adm/detalhe/agendamento/${id_agendamento}`}>Proximo</Link>
           {louvoresATocar?.length === 0 && (
             <p>Não é obrigatório selecionar os louvores agora.</p>
           )}

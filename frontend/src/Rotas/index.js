@@ -11,6 +11,7 @@ import NovoEvento from '../Pages/NovoEvento';
 import Usuario from '../Pages/Usuario';
 import NovoEvento2 from '../Pages/NovoEvento_2';
 import NovoEvento3 from '../Pages/NovoEvento_3';
+import DetalheDoAgendamento from '../Pages/DetalheDoAgendamento';
 
 import Privida from './Privida';
 import Auth from '../contexts/Auth';
@@ -31,7 +32,7 @@ export default function Rotas() {
           <Route path='/criar/evento' element={<Privida> <NovoEvento/> </Privida> }/>
           <Route path='/criar/evento/2/:id_agendamento' element={ <Privida> <NovoEvento2/> </Privida> }/>
           <Route path='/criar/evento/3/:id_agendamento' element={ <Privida> <NovoEvento3/> </Privida> }/>
-          <Route path='/:seguranca/detalhe/agendamento/:id_agendamento' element={ <Privida> <NovoEvento3/> </Privida> }/>
+          <Route path='/:seguranca/detalhe/agendamento/:id_agendamento' element={ <Privida> <DetalheDoAgendamento/> </Privida> }/>
         </Routes>
       </Auth>
     </Router>

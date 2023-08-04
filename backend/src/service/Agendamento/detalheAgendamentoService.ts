@@ -15,6 +15,7 @@ class detalheAgendamentoService{
                 horario_para_chegar: true,
                 descricao:true,
                 status: true,
+                confirmacao: true,
                 bandas: {
                     select: {
                         id: true,
