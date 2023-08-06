@@ -7,11 +7,12 @@ import styles from "./styles.module.scss";
 import Header from "../../components/Header";
 import api from "../../Service";
 import Lista from "../../components/Lista";
+import Loading from '../../components/Loading';
 
 export default function DetalheDoAgendamento() {
   const { id_agendamento, seguranca } = useParams();
 
-  const { data, refetch } = useQuery("detalhe", async () => {
+  const { data, refetch, isLoading } = useQuery("detalhe", async () => {
     return api
       .get("/detalhe/agendamento", {
         params: {
@@ -21,6 +22,10 @@ export default function DetalheDoAgendamento() {
       })
       .then((r) => Array(r.data));
   });
+
+  if (isLoading) {
+    <Loading />
+  }
 
   return (
     <>
@@ -70,7 +75,9 @@ export default function DetalheDoAgendamento() {
         })}
         <article>
           <Link to="/painel">Salvar rascunho</Link>
-          <button>{!data[0].confirmacao ? 'Publicar' : 'Despublicar'}</button>
+          {data && data.length > 0 && (
+            <button>{data[0]?.confirmacao ? 'Despublicar' : 'Publicar'}</button>
+          )}
         </article>
       </section>
     </>

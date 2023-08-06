@@ -31,7 +31,7 @@ export default function Painel() {
     }).then((r) => r.data)
   })
   const { data:musicos } = useQuery('musicos', async () => {
-    return api.get('/lista/musico', {
+    return api.post('/lista/musico',{},{
       params: {
         id_adm: adm.id,
         api_key: 'SistemaDaIgreja'
