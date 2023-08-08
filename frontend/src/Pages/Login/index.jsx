@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react'
-import { Link } from 'react-router-dom';
+import React, { useState, useContext, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/Auth';
 import { BiSolidUser, BiAlbum } from 'react-icons/bi';
 
@@ -12,9 +12,18 @@ import img from '../../imgs/logo.png';
 export default function Login() {
 
     const { Login, carregandoSession } = useContext(AuthContext)
+    const navigate = useNavigate()
 
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
+
+    useEffect(() => {
+        const  usuario = JSON.parse(localStorage.getItem('@InforUser'))
+
+        if(!!usuario) {
+            return navigate('/painel')
+        }
+    }, [navigate])
 
     async function handleLogin(e) {
         e.preventDefault()

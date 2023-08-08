@@ -17,20 +17,21 @@
     padding: 0 2rem;
     font-size: 25px;
 
-    a {
+    button {
         width: 100px;
         height: 38px;
 
         background-color: var(--vermelho-claro);
         color: var(--branco);
 
-        display: flex;
-        align-items: center;
-        justify-content: center;
 
         border-radius: 63px;
-
+        border: none;
         margin-right: 1rem;
+
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
     }
 }
 

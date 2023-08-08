@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { useQuery, useMutation } from 'react-query';
-import { useParams, Navigate, Link } from 'react-router-dom';
+import { useParams, Navigate, useNavigate } from 'react-router-dom';
 
 import api from '../../Service';
 import Header from '../../components/Header';
 import styles from './styles.module.scss';
 import { nota } from '../../Data';
+import Loading from '../../components/Loading';
+
 export default function DetalheLouvor() {
     const adm = JSON.parse(localStorage.getItem('@InforUser'))
     const { id, seguranca } = useParams()
+    const navigate = useNavigate();
+
     const [alterar, setAlterar] = useState(true)
     const [tom, setTom] = useState('')
     const [link, setLink] = useState('')
@@ -53,7 +57,7 @@ export default function DetalheLouvor() {
 
     if (isLoading) {
         return (
-            <p>carregando Informação</p>
+            <Loading/>
         );
     }
 
@@ -73,7 +77,7 @@ export default function DetalheLouvor() {
             <Header administrador={seguranca === 'adm' ? true : false} />
             <section className={styles.container}>
                 <article className={styles.title}>
-                    <Link to='/lista/louvor'>Volta</Link>
+                    <button onClick={ () => navigate(-1)}>Volta</button>
                     <h1>Detalhe do louvor - {data?.nome}</h1>
                 </article>
 

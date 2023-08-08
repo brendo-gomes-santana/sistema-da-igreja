@@ -1,0 +1,26 @@
+.box{
+    width: 100%;
+    max-width: 800px;
+    height: 2.5em;
+    background-color: var(--branco);
+    border: 1px solid var(--roxo);
+    margin-bottom: 0.5em;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1em;
+
+    p, a{
+        color: var(--preto);
+    }
+
+    button{
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        svg{
+            font-size: 25px;
+        }
+    }
+}
