@@ -10,7 +10,6 @@ import Header from "../../components/Header";
 import api from "../../Service";
 import Lista from "../../components/Lista";
 import Loading from "../../components/Loading";
-import Model from "../../components/Model";
 
 export default function DetalheDoAgendamento() {
   const { id_agendamento, seguranca } = useParams();
@@ -21,6 +20,7 @@ export default function DetalheDoAgendamento() {
   const [descricao, setDescricao] = useState("");
 
   const [mostrar, setMostrar] = useState(null);
+  const [alterar, setAlterar] = useState(true);
 
   const { data, refetch, isLoading } = useQuery("detalhe", async () => {
     return api
@@ -41,18 +41,14 @@ export default function DetalheDoAgendamento() {
   }, [isLoading, data]);
 
   const alterarInformacao = useMutation({
-    mutationFn: async ({ data, horario_para_chegar, status, descricao }) => {
+    mutationFn: async ({ descricao, confirmacao }) => {
       return api
         .patch(
           "/atualizando/agendamento",
           {
             id: id_agendamento,
-            data: data === "" ? undefined : data,
-            horario_para_chegar:
-              horario_para_chegar === "" ? undefined : horario_para_chegar,
-            status: status === "" ? undefined : status,
             descricao: descricao === "" ? undefined : descricao,
-            confirmacao: !confirmacao,
+            confirmacao: confirmacao,
           },
           {
             params: {
@@ -65,6 +61,7 @@ export default function DetalheDoAgendamento() {
     },
     onSuccess: () => {
       refetch();
+      setAlterar(true);
     },
   });
   const confirmar = useMutation({
@@ -104,11 +101,12 @@ export default function DetalheDoAgendamento() {
           >
             Volta para Painel
           </button>
-          {seguranca === "adm" && <Link to={`/atualizar/agendamento/${id_agendamento}`}>Alterar Informações</Link>}
+          {seguranca === "adm" && <button onClick={() => setAlterar(!alterar)} >{alterar ? 'Alterar Descrição' : 'Cancela'}</button>}
+          {seguranca === "adm" && !alterar && <button onClick={() => alterarInformacao.mutate({ descricao: descricao })}>Salvar</button>}
           {data && data.length > 0 && (
             <button
               onClick={() => {
-                alterarInformacao.mutate({});
+                alterarInformacao.mutate({ confirmacao: !confirmacao });
                 confirmar.mutate();
               }}
             >
@@ -121,7 +119,7 @@ export default function DetalheDoAgendamento() {
             <article key={item.id} className={styles.boxInfor}>
               <div id={styles.infor}>
                 <p>
-                  <strong>Data:</strong>
+                  <strong>Data: </strong>
                   {format(new Date(item.data), "dd/MM/yyyy")}
                 </p>
                 <p>
@@ -131,7 +129,7 @@ export default function DetalheDoAgendamento() {
                   <strong>Tipo:</strong> {item.status}
                 </p>
               </div>
-              <textarea value={descricao} disabled={true}></textarea>
+              <textarea value={descricao} disabled={alterar} onChange={ v  => setDescricao(v.target.value)} />
               {seguranca === "adm" && (
                 <div>
                   <h1>
@@ -149,10 +147,10 @@ export default function DetalheDoAgendamento() {
                             exit={{ opacity: 0, height: 0 }}
                             transition={{ duration: 0.3 }}
                           >
-                           <Link to={`/criar/evento/2/${id_agendamento}`}>cadastrar mais</Link>
+                            <Link to={`/criar/evento/2/${id_agendamento}`}>cadastrar mais</Link>
                           </motion.span>
                         )}
-    
+
                       </motion.span>
                     )}
                   </h1>
@@ -170,25 +168,25 @@ export default function DetalheDoAgendamento() {
               )}
               <div>
                 <h2>Lista de louvores
-                {seguranca === "adm" && !confirmacao && (
-                      <motion.span
-                        onMouseEnter={() => setMostrar(2)}
-                        onMouseLeave={() => setMostrar(null)}
-                      >
-                        <GoPlus />
-                        {mostrar === 2 && (
-                          <motion.span
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: "auto" }}
-                            exit={{ opacity: 0, height: 0 }}
-                            transition={{ duration: 0.3 }}
-                          >
-                           <Link to={`/criar/evento/3/${id_agendamento}`}>cadastrar mais</Link>
-                          </motion.span>
-                        )}
-    
-                      </motion.span>
-                    )}
+                  {seguranca === "adm" && !confirmacao && (
+                    <motion.span
+                      onMouseEnter={() => setMostrar(2)}
+                      onMouseLeave={() => setMostrar(null)}
+                    >
+                      <GoPlus />
+                      {mostrar === 2 && (
+                        <motion.span
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <Link to={`/criar/evento/3/${id_agendamento}`}>cadastrar mais</Link>
+                        </motion.span>
+                      )}
+
+                    </motion.span>
+                  )}
                 </h2>
                 {item.louvorATocar.length === 0 && (
                   <p>Não possui louvores cadastrado nesse evento</p>
@@ -202,11 +200,10 @@ export default function DetalheDoAgendamento() {
                   atualizar={refetch}
                 />
               </div>
-              <Model aberto={true}/>
             </article>
           );
         })}
-      </section>
+      </section >
     </>
   );
 }

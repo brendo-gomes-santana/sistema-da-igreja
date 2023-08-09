@@ -24,7 +24,7 @@ export default function NovoEvento() {
     const [data, setData] = useState(new Date());
     const [horario, setHorario] = useState('')
     const [selecao, setSelecao] = useState('')
-    const [descricao, setDescricao] = useState('vestimenta\nMulher:\nHomem:\n\nDescrição\n')
+    const [descricao, setDescricao] = useState('Vestimenta:\n\nMulher -> \nHomem -> \n\nDescrição:\n')
 
     const cadastrar = useMutation({
         mutationFn: async ({ data, horario, selecao, descricao }) => {

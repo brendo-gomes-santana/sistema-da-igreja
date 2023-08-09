@@ -8,7 +8,6 @@ import { MdOutlineLibraryMusic } from 'react-icons/md';
 
 import { FaEye } from 'react-icons/fa';
 import { AiFillDelete } from 'react-icons/ai';
-import { BiSolidMessageSquareEdit } from 'react-icons/bi';
 
 import { format } from 'date-fns';
 
@@ -108,6 +107,10 @@ export default function Painel() {
           {isLoading && (
             <p>Carregando Informação</p>
           )}
+
+          {data?.length === 0 && (
+            <p>Você não possui agendamentos</p>
+          )}
           {data?.map((agendar) => {
             return (
               <div className={styles.boxAgendamento} key={agendar.id}>
@@ -119,7 +122,6 @@ export default function Painel() {
                 <p>{agendar.horario_para_chegar}h</p>
                 <div className={styles.boxIcon}>
                   <FaEye onClick={ () => navigate(`/adm/detalhe/agendamento/${agendar.id}`) }/>
-                  <BiSolidMessageSquareEdit />
                   <AiFillDelete onClick={ () => deleteAgendamento.mutate({id: agendar.id}) }/>
                 </div>
               </div>
