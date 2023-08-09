@@ -22,7 +22,7 @@ export default function Usuario() {
     return api
       .get("/infor/adm", {
         params: {
-          api_key: "SistemaDaIgreja",
+          api_key: process.env.React_App_API_KEY,
           id_adm: id,
         },
       })
@@ -39,7 +39,7 @@ export default function Usuario() {
           },
           {
             params: {
-              api_key: "SistemaDaIgreja",
+              api_key: process.env.React_App_API_KEY,
             },
           }
         )
@@ -64,7 +64,7 @@ export default function Usuario() {
           },
           {
             params: {
-              api_key: "SistemaDaIgreja",
+              api_key: process.env.React_App_API_KEY,
             },
           }
         )

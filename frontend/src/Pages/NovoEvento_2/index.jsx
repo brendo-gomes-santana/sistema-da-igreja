@@ -26,7 +26,7 @@ export default function NovoEvento2() {
           },
           {
             params: {
-              api_key: "SistemaDaIgreja",
+              api_key: process.env.React_App_API_KEY,
               id_adm: usuario.id,
             },
           }
@@ -43,7 +43,7 @@ export default function NovoEvento2() {
           {},
           {
             params: {
-              api_key: "SistemaDaIgreja",
+              api_key: process.env.React_App_API_KEY,
               id_adm: usuario.id,
               id_musico: id,
               id_agendamento: id_agendamento,
@@ -61,7 +61,7 @@ export default function NovoEvento2() {
     return api
       .get("/lista/banda", {
         params: {
-          api_key: "SistemaDaIgreja",
+          api_key: process.env.React_App_API_KEY,
           id_agendamento: id_agendamento,
           id_adm: usuario.id,
         },
@@ -74,7 +74,7 @@ export default function NovoEvento2() {
       return api
         .delete("/remove/banda", {
           params: {
-            api_key: "SistemaDaIgreja",
+            api_key: process.env.React_App_API_KEY,
             id_adm: usuario.id,
             id: id,
           },

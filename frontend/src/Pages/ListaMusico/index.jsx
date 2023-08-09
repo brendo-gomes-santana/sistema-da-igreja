@@ -14,7 +14,7 @@ export default function ListaMusico() {
     const { data, isLoading, refetch } = useQuery('lista-musicos', async () => {
         return api.post('/lista/musico', {}, {
             params: {
-                api_key: 'SistemaDaIgreja',
+                api_key: process.env.React_App_API_KEY,
                 id_adm: adm.id
             }
         }).then((r) => r.data)
@@ -24,7 +24,7 @@ export default function ListaMusico() {
         mutationFn: async ({ id }) => {
             return api.delete('/remove/musico', {
                 params: {
-                    api_key: 'SistemaDaIgreja',
+                    api_key: process.env.React_App_API_KEY,
                     id_adm: adm.id,
                     id_musico: id
                 }

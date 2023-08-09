@@ -16,7 +16,7 @@ export default function ListaLouvores() {
         return api.get('/lista/louvor', {
             params: {
                 id_adm: adm.id,
-                api_key: 'SistemaDaIgreja'
+                api_key: process.env.React_App_API_KEY
             }
         }).then((r) => r.data)
     })
@@ -26,7 +26,7 @@ export default function ListaLouvores() {
             return api.delete('/remove/louvor', {
                 params: {
                     id_adm: adm.id,
-                    api_key: 'SistemaDaIgreja',
+                    api_key: process.env.React_App_API_KEY,
                     id: id
                 }  
             })

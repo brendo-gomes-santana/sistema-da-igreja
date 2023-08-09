@@ -36,7 +36,7 @@ export default function NovoEvento() {
             }, {
                 params: {
                     id_adm: adm.id,
-                    api_key: 'SistemaDaIgreja'
+                    api_key: process.env.React_App_API_KEY
                 }
             }).then((r) => r.data)
         },

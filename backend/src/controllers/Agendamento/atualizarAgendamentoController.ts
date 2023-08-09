@@ -6,7 +6,7 @@ class atualizarAgendamentoController{
 
         const {
             id, 
-            data,
+            dia,
             horario_para_cheagar,
             descricao,
             confirmacao
@@ -15,7 +15,7 @@ class atualizarAgendamentoController{
         const inicializacao = new atualizarAgendamentoService()
         const atualizado = await inicializacao.execute({
             id, 
-            data,
+            dia,
             horario_para_cheagar,
             descricao,
             confirmacao

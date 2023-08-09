@@ -11,14 +11,14 @@ export default function Auth({children}) {
   const navigata = useNavigate()
 
   const Login = useMutation({ 
-    mutationFn: ({email, senha}) => {
+    mutationFn: async ({email, senha}) => {
       return api.post('/session/adm', {
         email,
         senha
       },
       {
         params: {
-          api_key: 'SistemaDaIgreja'
+          api_key: process.env.React_App_API_KEY
         }
       }).then((r) => r.data)
     },

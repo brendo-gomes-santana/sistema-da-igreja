@@ -10,6 +10,7 @@ import Header from "../../components/Header";
 import api from "../../Service";
 import Lista from "../../components/Lista";
 import Loading from "../../components/Loading";
+import Model from "../../components/Model";
 
 export default function DetalheDoAgendamento() {
   const { id_agendamento, seguranca } = useParams();
@@ -25,16 +26,13 @@ export default function DetalheDoAgendamento() {
     return api
       .get("/detalhe/agendamento", {
         params: {
-          api_key: "SistemaDaIgreja",
+          api_key: process.env.React_App_API_KEY,
           id: id_agendamento,
         },
       })
       .then((r) => Array(r.data));
   });
 
-  if (isLoading) {
-    <Loading />;
-  }
   useEffect(() => {
     if (!isLoading && data) {
       setConfirmacao(data[0]?.confirmacao);
@@ -58,7 +56,7 @@ export default function DetalheDoAgendamento() {
           },
           {
             params: {
-              api_key: "SistemaDaIgreja",
+              api_key: process.env.React_App_API_KEY,
               id_adm: usuario.id,
             },
           }
@@ -79,16 +77,20 @@ export default function DetalheDoAgendamento() {
           },
           {
             params: {
-              api_key: "SistemaDaIgreja",
+              api_key: process.env.React_App_API_KEY,
               id_adm: usuario.id,
               id_agendamento: id_agendamento,
             },
           }
         )
-        .then((r) => console.log(r.data));
+        .then((r) => r.data);
     },
   });
-  console.log(confirmacao);
+
+  if (isLoading) {
+    <Loading />;
+  }
+
   return (
     <>
       <Header administrador={true} />
@@ -102,7 +104,7 @@ export default function DetalheDoAgendamento() {
           >
             Volta para Painel
           </button>
-          {seguranca === "adm" && <button>AlterarInformações</button>}
+          {seguranca === "adm" && <Link to={`/atualizar/agendamento/${id_agendamento}`}>Alterar Informações</Link>}
           {data && data.length > 0 && (
             <button
               onClick={() => {
@@ -119,7 +121,7 @@ export default function DetalheDoAgendamento() {
             <article key={item.id} className={styles.boxInfor}>
               <div id={styles.infor}>
                 <p>
-                  <strong>Data:</strong>{" "}
+                  <strong>Data:</strong>
                   {format(new Date(item.data), "dd/MM/yyyy")}
                 </p>
                 <p>
@@ -200,6 +202,7 @@ export default function DetalheDoAgendamento() {
                   atualizar={refetch}
                 />
               </div>
+              <Model aberto={true}/>
             </article>
           );
         })}

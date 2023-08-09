@@ -17,7 +17,7 @@ export default function Lista({ data, url, adm, rota, atualizar, caminho }) {
       return api
         .delete(url, {
           params: {
-            api_key: "SistemaDaIgreja",
+            api_key: process.env.React_App_API_KEY,
             id_adm: usuario.id,
             id: id,
           },

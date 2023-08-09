@@ -8,6 +8,7 @@ import InputSenha from '../../components/InputSenha';
 import styles from './style.module.scss';
 import { motion } from 'framer-motion';
 import img from '../../imgs/logo.png';
+import Loading from '../../components/Loading';
 
 export default function Login() {
 
@@ -16,13 +17,17 @@ export default function Login() {
 
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
+    const [carregando, setCarregando] = useState(true)
 
     useEffect(() => {
         const  usuario = JSON.parse(localStorage.getItem('@InforUser'))
 
         if(!!usuario) {
-            return navigate('/painel')
+            navigate('/painel')
+            setCarregando(false)
+            return
         }
+        setCarregando(false)
     }, [navigate])
 
     async function handleLogin(e) {
@@ -34,6 +39,11 @@ export default function Login() {
         }
         Login.mutate({ email: email, senha: senha })
     }
+
+    if(carregando){
+        return <Loading/>
+    }
+
     return (
         <section className={styles.container}>
             <img src={img} alt="logo" />

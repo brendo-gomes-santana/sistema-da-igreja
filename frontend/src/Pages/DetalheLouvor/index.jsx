@@ -21,7 +21,7 @@ export default function DetalheLouvor() {
     const { data, isLoading, refetch } = useQuery('detalhe-louvor', async () => {
         return api.get('/detalhe/louvor', {
             params: {
-                api_key: 'SistemaDaIgreja',
+                api_key: process.env.React_App_API_KEY,
                 id
             }
         }).then((r) => r.data)
@@ -37,7 +37,7 @@ export default function DetalheLouvor() {
             }, {
                 params: {
                     id_adm: adm.id,
-                    api_key: 'SistemaDaIgreja',
+                    api_key: process.env.React_App_API_KEY,
                 }
             })
         },

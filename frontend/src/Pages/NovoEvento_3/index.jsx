@@ -18,7 +18,7 @@ export default function NovoEvento3() {
     return api
       .get("/lista/louvor", {
         params: {
-          api_key: "SistemaDaIgreja",
+          api_key: process.env.React_App_API_KEY,
           id_adm: usuario.id,
         },
       })
@@ -30,7 +30,7 @@ export default function NovoEvento3() {
       return api
         .get("/lista/agendamento/louvor", {
           params: {
-            api_key: "SistemaDaIgreja",
+            api_key: process.env.React_App_API_KEY,
             id_adm: usuario.id,
             id_agendamento: id_agendamento,
           },
@@ -47,7 +47,7 @@ export default function NovoEvento3() {
           {},
           {
             params: {
-              api_key: "SistemaDaIgreja",
+              api_key: process.env.React_App_API_KEY,
               id_adm: usuario.id,
               id_agendamento: id_agendamento,
               id_louvor: louvor,
@@ -66,7 +66,7 @@ export default function NovoEvento3() {
       return api
         .delete("/remove/agendamento/louvor", {
           params: {
-            api_key: "SistemaDaIgreja",
+            api_key: process.env.React_App_API_KEY,
             id_adm: usuario.id,
             id: id,
           },
