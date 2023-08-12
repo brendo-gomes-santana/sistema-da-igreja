@@ -2,27 +2,30 @@ import React, { useState, useContext, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/Auth';
 import { BiSolidUser, BiAlbum } from 'react-icons/bi';
-
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import InputSenha from '../../components/InputSenha';
 import styles from './style.module.scss';
 import { motion } from 'framer-motion';
 import img from '../../imgs/logo.png';
 import Loading from '../../components/Loading';
+import { Schemalogin } from '../../validacao';
 
 export default function Login() {
 
-    const { Login, carregandoSession } = useContext(AuthContext)
-    const navigate = useNavigate()
+    const { Login, carregandoSession } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        resolver: zodResolver(Schemalogin)
+    });
 
-    const [email, setEmail] = useState('')
-    const [senha, setSenha] = useState('')
     const [carregando, setCarregando] = useState(true)
 
     useEffect(() => {
-        const  usuario = JSON.parse(localStorage.getItem('@InforUser'))
+        const usuario = JSON.parse(localStorage.getItem('@InforUser'))
 
-        if(!!usuario) {
+        if (!!usuario) {
             navigate('/painel')
             setCarregando(false)
             return
@@ -30,34 +33,37 @@ export default function Login() {
         setCarregando(false)
     }, [navigate])
 
-    async function handleLogin(e) {
-        e.preventDefault()
-
-        if (!email || !senha) {
-            alert('Preenchar os campos')
-            return;
-        }
-        Login.mutate({ email: email, senha: senha })
+    async function handleLogin(data) {
+        Login.mutate(
+            {
+                email: data.email,
+                senha: data.senha
+            }
+        )
     }
 
-    if(carregando){
-        return <Loading/>
+    if (carregando) {
+        return <Loading />
     }
 
     return (
         <section className={styles.container}>
             <img src={img} alt="logo" />
-            <form className={styles.form} onSubmit={handleLogin}>
+            <form className={styles.form} onSubmit={handleSubmit(handleLogin)}>
                 <div className={styles.ContainerInput}>
                     <div>
                         <BiSolidUser />
-                        <input type='email' placeholder='E-mail'
-                            value={email} onChange={v => setEmail(v.target.value)} />
+                        <input type='email'
+                            placeholder={errors.email ? errors.email.message : 'E-mail'}
+                            {...register('email')}
+                            style={errors.email && { border: '1px solid #ff0000' }}
+                        />
                     </div>
-                    <InputSenha placeholder='Senha' mostrarIcon={true}
-                        value={senha} onChange={v => setSenha(v.target.value)} />
+                    <InputSenha placeholder={errors.senha ? errors.senha.message : 'Senha'}
+                        register={register}
+                        mostrarIcon={true}
+                        style={errors.senha && { border: '1px solid #ff0000' }} />
                 </div>
-                <Link href="###">Esqueceu a senha? Recuperar</Link>
                 <div className={styles.containerButton}>
                     <motion.button
                         type='submit'
