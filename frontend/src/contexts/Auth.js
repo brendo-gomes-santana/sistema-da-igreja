@@ -1,6 +1,7 @@
 import React, { createContext } from "react";
 import { useMutation } from 'react-query';
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 import api from "../Service";
 
@@ -25,10 +26,11 @@ export default function Auth({children}) {
     onSuccess: (data) => {
       localStorage.setItem('@InforUser' , JSON.stringify(data))
       api.defaults.headers.common['Authorization'] = data.token;
-      navigata('/painel')
+      navigata('/painel');
+      toast.success(`Bem vindo ${data.nome}`)
     },
     onError: (err) => {
-      alert(err.response.data.error)
+      toast.error(err.response.data.error);
     }
   })
   function deslogar (){

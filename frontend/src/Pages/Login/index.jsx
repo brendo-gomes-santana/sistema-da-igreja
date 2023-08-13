@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/Auth';
 import { BiSolidUser, BiAlbum } from 'react-icons/bi';
 import { useForm } from 'react-hook-form';
@@ -34,7 +34,7 @@ export default function Login() {
     }, [navigate])
 
     async function handleLogin(data) {
-        Login.mutate(
+       Login.mutate(
             {
                 email: data.email,
                 senha: data.senha
