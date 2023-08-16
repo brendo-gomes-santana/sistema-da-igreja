@@ -1,17 +1,19 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useMutation } from 'react-query';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import Header from '../../components/Header';
-
 import styles from './styles.module.scss';
 import api from '../../Service';
+import { SchemaCadastrarMusico } from '../../validacao';
 
 export default function CriarMusica() {
     const adm = JSON.parse(localStorage.getItem('@InforUser'))
 
-    const [nome, setNome] = useState('')
-    const [email, setEmail] = useState('')
-    const [tipo, setTipo] = useState(null)
+    const { register, handleSubmit, reset, formState: { errors } } = useForm({
+        resolver: zodResolver(SchemaCadastrarMusico)
+    });
 
     const cadastrar = useMutation({
         mutationFn: async ({ nome, email, tipo }) => {
@@ -27,47 +29,44 @@ export default function CriarMusica() {
             }).then((r) => r.data)
         },
         onSuccess: () => {
-            setEmail('')
-            setNome('')
-            setTipo('')
+            reset()
         }
     })
-    async function handleCadastrarMusico(e) {
-        e.preventDefault();
-        if(!nome || !email || !tipo){
-            return alert('Preenchar todo os campos')
-        }
-
-        cadastrar.mutate({ nome: nome, email: email, tipo: tipo })
+    async function handleCadastrarMusico(data) {
+        cadastrar.mutate({ nome: data.nome, email: data.email, tipo: data.tipo })
     }
     return (
         <>
-            <Header administrador={true}/>
+            <Header administrador={true} />
             <section className={styles.container}>
                 <article className={styles.title}>
                     <h1>Novo Músico</h1>
                 </article>
 
-                <form onSubmit={handleCadastrarMusico} className={styles.form}>
+                <form onSubmit={handleSubmit(handleCadastrarMusico)} className={styles.form}>
                     <div className={styles.baseInput}>
                         <label>Nome.: </label>
                         <input type="text" placeholder='Digite o nome'
-                            value={nome} onChange={v => setNome(v.target.value)} />
+                            {...register('nome')} />
                     </div>
+                    {errors.nome && <span> {errors.nome.message}</span>}
                     <div className={styles.baseInput}>
                         <label>E-mail: </label>
                         <input type="email" placeholder='Digite o email'
-                            value={email} onChange={v => setEmail(v.target.value)} />
+                            {...register('email')} />
                     </div>
+                    {errors.email && <span>{errors.email.message}</span>}
+
                     <div className={styles.baseInput}>
                         <label>Tipo...: </label>
-                        <select value={ tipo } onChange={ v => setTipo(v.target.value)}>
-                            <option value={null}>Selecione o modelo</option>
+                        <select {...register('tipo')}>
+                            <option value=''>Selecione o modelo</option>
                             <option value='On Fire'>On fire</option>
                             <option value='Geral'>Geral</option>
-
                         </select>
                     </div>
+                    {errors.tipo && <span>{errors.tipo.message}</span>}
+
                     <button type='submit'> {cadastrar.isLoading ?
                         ('carregando...')
                         :
