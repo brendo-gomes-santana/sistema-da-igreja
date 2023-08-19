@@ -23,14 +23,20 @@ export const Box = styled.View`
     justify-content: center;
     align-items: center;
 `
-
+export const ImgInput = styled.View`
+width: 100%;
+flex-direction: row;
+align-items: center;
+position: relative;
+`
 export const Input = styled.TextInput`
-    width: 95%;
+    width: 100%;
     height: 65px;
     background-color: #ddd;
-padding: 0 10px;
+padding: 0 10px 0 55px;
     margin-bottom: 10px;
-    font-size: 15px;
+    margin-left: 2px;
+    font-size: 17px;
     border-radius: 10px;
 `
 
