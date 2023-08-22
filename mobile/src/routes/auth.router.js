@@ -1,5 +1,4 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { Button } from 'react-native';
 import Home from '../pages/home/inde';
 import User from '../pages/User';
 
@@ -16,7 +15,8 @@ export default function RotasLogadas(){
                         backgroundColor: '#1B3358',
                     },
                     headerTintColor: '#fff',
-                    headerTitle: 'Agendar'
+                    headerTitle: 'Agendar',
+                    drawerLabel: 'Agendar'
                 }}
                 />
             <Drawer.Screen 
@@ -27,7 +27,8 @@ export default function RotasLogadas(){
                         backgroundColor: '#1B3358'
                     },
                     headerTintColor: '#fff',
-                    headerTitle: 'Configuração'
+                    headerTitle: 'Configuração',
+                    drawerLabel: 'Configuração'
                 }}/>
         </Drawer.Navigator>
     )

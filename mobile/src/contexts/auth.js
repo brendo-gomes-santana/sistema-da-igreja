@@ -13,7 +13,6 @@ export default function AuthProvider({ children }) {
     
     useEffect(() => {
         (async ()=>{
-
             const user = JSON.parse(await AsyncStorage.getItem('@user'))
             
             if(!user){
@@ -46,20 +45,25 @@ export default function AuthProvider({ children }) {
             })()
             setCarregarLogar(false);
         })
-            .catch((err) => {
+        .catch((err) => {
                 setCarregarLogar(false);
                 console.log(err)
             })
     }
 
-
+    async function deslogar(){
+        await AsyncStorage.clear()
+        setUser(null)
+    }
     return (
         <AuthContext.Provider
             value={{
                 user,
                 logar,
+                carregarLogar,
                 logado: !!user,
                 carregando,
+                deslogar,
             }}
         >
             {children}

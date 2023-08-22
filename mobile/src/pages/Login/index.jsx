@@ -1,13 +1,14 @@
 import React, { useState, useContext } from "react";
 
 import { StatusBar } from "expo-status-bar";
-import { Entypo } from '@expo/vector-icons';
+import { Entypo, EvilIcons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { AuthContext } from "../../contexts/auth";
+import { ActivityIndicator } from 'react-native';
 import { Container, Box, Img, Input, ButtonLogin, ButtonLoginText, ImgInput } from "./style";
 export default function Login() {
-    
-    const { logar } = useContext(AuthContext);
+
+    const { logar, carregarLogar } = useContext(AuthContext);
 
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
@@ -48,8 +49,16 @@ export default function Login() {
                 </ImgInput>
 
                 <ButtonLogin onPress={handleLogin} >
-                    <Entypo name='login' size={25} color="#fff" />
-                    <ButtonLoginText>Login</ButtonLoginText>
+
+                    {carregarLogar ? (
+                        <ActivityIndicator size={40} color="#fff" />
+                    ) : (
+                        <>
+                            <Entypo name='login' size={25} color="#fff" />
+                            <ButtonLoginText>Login</ButtonLoginText>
+                        </>
+                    )}
+
                 </ButtonLogin>
             </Box>
         </Container>
