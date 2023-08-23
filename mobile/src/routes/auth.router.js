@@ -1,15 +1,28 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import Home from '../pages/home/inde';
-import User from '../pages/User';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+import Home from '../pages/home';
+import User from '../pages/User';
+import DetalheAgendamento from '../pages/DetalheAgendamento';
 const Drawer = createDrawerNavigator();
+const Stack = createNativeStackNavigator();
+
+function RotasDoHome(){
+    return(
+        <Stack.Navigator>
+            <Stack.Screen name='Home' component={Home} options={{headerShown: false}}/>
+            <Stack.Screen name='detalhe' component={DetalheAgendamento} options={{headerShown: false}}/>
+        </Stack.Navigator>
+    )
+}
+
 
 export default function RotasLogadas(){
     return(
         <Drawer.Navigator>
             <Drawer.Screen 
-                name='home' 
-                component={Home}
+                name='groupHome' 
+                component={RotasDoHome}
                 options={{
                     headerStyle: {
                         backgroundColor: '#1B3358',
