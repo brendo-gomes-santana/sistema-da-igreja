@@ -3,7 +3,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Home from '../pages/home';
 import User from '../pages/User';
+
 import DetalheAgendamento from '../pages/DetalheAgendamento';
+import DetalheLouvor from '../pages/DetalheLouvor';
 const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -12,6 +14,7 @@ function RotasDoHome(){
         <Stack.Navigator>
             <Stack.Screen name='Home' component={Home} options={{headerShown: false}}/>
             <Stack.Screen name='detalhe' component={DetalheAgendamento} options={{headerShown: false}}/>
+            <Stack.Screen name='detalhe-louvor' component={DetalheLouvor} options={{headerShown: false}}/>
         </Stack.Navigator>
     )
 }

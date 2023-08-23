@@ -12,7 +12,7 @@ export default function DetalheAgendamento({route,navigation}) {
     return (
         <Container>
             <Header>
-                <Button onPress={ () => navigation.goBack()}>
+                <Button onPress={ () => navigation.push('Home')}>
                     <AntDesign name="back" size={24} color="black" />
                 </Button>
                 <Title>Detalhe do agendamento</Title>
@@ -26,9 +26,7 @@ export default function DetalheAgendamento({route,navigation}) {
                 <TituloLouvor>Louvores</TituloLouvor>
                 <FlatList 
                     data={agendar.agendamento.louvorATocar}
-                    renderItem={ ({item}) => <ListLouvor louvor={item}
-                    keyExtractor={ item => item.agendamento.louvor.id}
-                    />}
+                    renderItem={ ({item}) => <ListLouvor louvor={item} navigation={navigation}/>}
                 />
 
             </Section>
