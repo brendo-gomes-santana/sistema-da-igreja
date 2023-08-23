@@ -4,7 +4,7 @@ import api from '../../service';
 import { AuthContext } from '../../contexts/auth';
 import { Container } from "./styled";
 import ListAgendar from "../../components/ListAgendar";
-export default function Home({navigation}) {
+export default function Home({ navigation }) {
 
     const { user } = useContext(AuthContext)
     const [loading, setLoading] = useState(true);
@@ -26,16 +26,16 @@ export default function Home({navigation}) {
 
     if (loading) {
         return (
-            <View style={{marginTop: 25}}>
-                <ActivityIndicator color='#000' size={50}/>
+            <View style={{ marginTop: 25 }}>
+                <ActivityIndicator color='#000' size={50} />
             </View>
         )
     }
 
-    if(agendas.length === 0){
-        return(
-            <View style={{alignItems: 'center', marginTop: 25}}>
-                <Text style={{fontSize: 18}}>Você não possui agendamento</Text>
+    if (agendas.length === 0) {
+        return (
+            <View style={{ alignItems: 'center', marginTop: 25 }}>
+                <Text style={{ fontSize: 18 }}>Você não possui agendamento</Text>
             </View>
         )
     }
@@ -44,8 +44,9 @@ export default function Home({navigation}) {
         <Container>
             <FlatList
                 data={agendas}
-                renderItem={({ item }) => <ListAgendar agendar={item} navigation={navigation}/>}
+                renderItem={({ item }) => <ListAgendar agendar={item} navigation={navigation} />}
                 keyExtractor={item => item.id} />
         </Container>
+
     )
 }

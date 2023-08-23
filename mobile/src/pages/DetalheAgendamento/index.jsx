@@ -1,9 +1,14 @@
-
 import React from 'react'
-import { Container, Header, Button, Title, Section } from './styled'
 import { AntDesign } from '@expo/vector-icons';
+import { FlatList } from 'react-native';
+import { format } from 'date-fns';
 
-export default function DetalheAgendamento({navigation}) {
+import ListLouvor from '../../components/ListLouvor';
+import { Container, Header, Button, Title, Section, Infor, Titulo, Descricao, TituloLouvor } from './styled'
+export default function DetalheAgendamento({route,navigation}) {
+    
+    const { agendar } = route.params;
+
     return (
         <Container>
             <Header>
@@ -13,8 +18,19 @@ export default function DetalheAgendamento({navigation}) {
                 <Title>Detalhe do agendamento</Title>
             </Header>
             <Section>
-
+                <Infor><Titulo>Data: </Titulo> {format(new Date(agendar.agendamento.data), 'MM/dd/yyyy')}</Infor>
+                <Infor><Titulo>Horário: </Titulo> {format(new Date(agendar.agendamento.data), 'H:mm')} h</Infor>
+                <Infor><Titulo>Status: </Titulo> {agendar.agendamento.status}</Infor>
+                <Descricao>{agendar.agendamento.descricao}</Descricao>
                 
+                <TituloLouvor>Louvores</TituloLouvor>
+                <FlatList 
+                    data={agendar.agendamento.louvorATocar}
+                    renderItem={ ({item}) => <ListLouvor louvor={item}
+                    keyExtractor={ item => item.agendamento.louvor.id}
+                    />}
+                />
+
             </Section>
         </Container>
     )
