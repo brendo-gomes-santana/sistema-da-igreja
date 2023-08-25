@@ -43,6 +43,7 @@ class SessionMusicoService{
             id: musico.id,
             nome: musico.nome,
             email: musico.email,
+            codigo: musico.codigo,
             token
         }
     }   

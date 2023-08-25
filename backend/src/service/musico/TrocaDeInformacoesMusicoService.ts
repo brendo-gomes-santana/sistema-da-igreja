@@ -2,7 +2,7 @@ import prisma from '../../prisma';
 import { hash } from 'bcryptjs';
 
 class TrocaDeInformacoesMusicoService{
-    async execute(id_musico: string, email?: string, senha?: string){
+    async execute(id_musico: string, email?: string, senha?: string, codigo?: string){
 
         if(!id_musico){
             throw new Error("informe id_musico")
@@ -20,10 +20,10 @@ class TrocaDeInformacoesMusicoService{
             where: { id: id_musico },
             data: {
                 email,
-                senha: senha && await hash(senha, 10)
+                senha: senha && await hash(senha, 10),
+                codigo: codigo === '' ? undefined : codigo
             }
         })
-
 
         return trocado;
     }

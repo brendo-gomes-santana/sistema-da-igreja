@@ -28,7 +28,7 @@ export default function AuthProvider({ children }) {
         })()
     }, [])
 
-    async function logar(email, senha, id_mensagem) {
+    async function logar(email, senha) {
         setCarregarLogar(true);
         
         await api.post('/session/musico', {

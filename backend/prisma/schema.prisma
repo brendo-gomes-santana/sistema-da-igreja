@@ -26,6 +26,7 @@ model Musico{
   senha String
   
   tipo String
+  codigo String?
 
   bandas Banda[]
 
