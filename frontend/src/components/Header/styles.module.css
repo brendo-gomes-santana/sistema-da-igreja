@@ -1,0 +1,55 @@
+.header {
+  height: 100vh;
+  width: 250px;
+  background-color: var(--fundo);
+  position: fixed;
+}
+
+.baseImg {
+  display: flex;
+  justify-content: center;
+}
+.baseImg img {
+  width: 120px;
+  height: 120px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+}
+.nav .linkhome {
+  margin: 0.5rem 0.5rem;
+  font-size: 25px;
+  color: var(--branco);
+}
+
+.base {
+  margin-bottom: 0.5rem;
+}
+.base .link {
+  width: 100%;
+  font-size: 25px;
+  color: var(--branco);
+  background: transparent;
+  border: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0.5rem;
+  cursor: pointer;
+}
+
+.baseLink {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0.5rem;
+}
+.baseLink a, .baseLink button {
+  color: var(--branco);
+  border: none;
+  background-color: transparent;
+  text-align: left;
+  font-size: 20px;
+  cursor: pointer;
+}/*# sourceMappingURL=styles.module.css.map */

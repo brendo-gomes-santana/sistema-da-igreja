@@ -1,0 +1,10 @@
+.COntainerSenha {
+  position: relative;
+}
+.COntainerSenha input {
+  width: 100%;
+}
+.COntainerSenha span {
+  position: absolute;
+  right: 1.5%;
+}/*# sourceMappingURL=style.module.css.map */

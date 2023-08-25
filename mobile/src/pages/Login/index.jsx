@@ -1,11 +1,24 @@
 import React, { useState, useContext } from "react";
-
 import { StatusBar } from "expo-status-bar";
-import { Entypo, EvilIcons } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
+import { ActivityIndicator, Alert } from 'react-native';
+import * as Notifications from 'expo-notifications';
+
+
 import { AuthContext } from "../../contexts/auth";
-import { ActivityIndicator } from 'react-native';
 import { Container, Box, Img, Input, ButtonLogin, ButtonLoginText, ImgInput } from "./style";
+
+
+Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+        shouldShowAlert: true,
+        shouldPlaySound: true,
+        shouldSetBadge: true,
+    }),
+});
+
+
 export default function Login() {
 
     const { logar, carregarLogar } = useContext(AuthContext);
@@ -13,8 +26,9 @@ export default function Login() {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
 
-    function handleLogin() {
-        logar(email, senha)
+    async function handleLogin() {
+        const token = (await Notifications.getExpoPushTokenAsync()).data;
+        logar(email, senha, token)
     }
 
     return (

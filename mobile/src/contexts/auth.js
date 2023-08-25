@@ -1,21 +1,23 @@
+import { createContext, useState, useEffect } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { createContext, useState, useEffect } from "react";
+
 import api from "../service";
 export const AuthContext = createContext({});
 
 
+
 export default function AuthProvider({ children }) {
-    
+
     const [user, setUser] = useState(null);
     const [carregarLogar, setCarregarLogar] = useState(false);
     const [carregando, setCarregando] = useState(true);
-    
+
     useEffect(() => {
-        (async ()=>{
+        (async () => {
             const user = JSON.parse(await AsyncStorage.getItem('@user'))
-            
-            if(!user){
+
+            if (!user) {
                 setUser(null);
                 setCarregando(false);
                 return;
@@ -24,10 +26,11 @@ export default function AuthProvider({ children }) {
             setCarregando(false);
             api.defaults.headers['Authorization'] = `Bearer ${user.token}`;
         })()
-    },[])
+    }, [])
 
-    async function logar(email, senha) {
+    async function logar(email, senha, id_mensagem) {
         setCarregarLogar(true);
+        
         await api.post('/session/musico', {
             email,
             senha
@@ -36,22 +39,22 @@ export default function AuthProvider({ children }) {
                 api_key: process.env.EXPO_PUBLIC_API_KEY
             }
         }).then((r) => {
-            const{ token } = r.data;
+            const { token } = r.data;
             setUser(r.data)
             api.defaults.headers['Authorization'] = `Bearer ${token}`;
 
-            (async()=> {
+            (async () => {
                 await AsyncStorage.setItem('@user', JSON.stringify(r.data))
             })()
             setCarregarLogar(false);
         })
-        .catch((err) => {
+            .catch((err) => {
                 setCarregarLogar(false);
                 console.log(err)
             })
     }
 
-    async function deslogar(){
+    async function deslogar() {
         await AsyncStorage.clear()
         setUser(null)
     }

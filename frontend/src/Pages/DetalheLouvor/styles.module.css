@@ -1,0 +1,95 @@
+.container {
+  padding: 1rem 1rem 0 290px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.title {
+  width: 100%;
+  height: 69px;
+  border: 1px solid var(--cinza-100);
+  margin-bottom: 47px;
+  border-radius: 63px;
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  font-size: 25px;
+}
+.title button {
+  width: 100px;
+  height: 38px;
+  background-color: var(--vermelho-claro);
+  color: var(--branco);
+  border-radius: 63px;
+  border: none;
+  margin-right: 1rem;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.form {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+}
+.form a {
+  font-size: 20px;
+  color: var(--preto);
+  margin: 0.5rem;
+}
+
+.tom_alterar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.tom_alterar .tom {
+  display: flex;
+  align-items: center;
+}
+.tom_alterar .tom label {
+  font-size: 25px;
+  margin-right: 0.3rem;
+}
+.tom_alterar .tom select, .tom_alterar .tom input {
+  width: 360px;
+  height: 50px;
+  padding: 0 0.5rem;
+}
+.tom_alterar button {
+  width: 139px;
+  height: 54px;
+  background-color: var(--verde-mais-forte);
+  color: var(--branco);
+  border-radius: 63px;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+}
+.link label {
+  font-size: 25px;
+  margin-right: 0.3rem;
+}
+.link input {
+  width: 360px;
+  height: 50px;
+  padding: 0 0.5rem;
+}
+
+.letra {
+  width: 474px;
+  height: 450px;
+  resize: none;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 1.5rem;
+}/*# sourceMappingURL=styles.module.css.map */
