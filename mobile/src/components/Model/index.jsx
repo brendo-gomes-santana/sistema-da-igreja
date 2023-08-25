@@ -52,8 +52,16 @@ export default function Model({ ativado, ativador, id }) {
         >
             <Container>
                 <Title>Alterar Senha</Title>
-                <Input placeholder="Digite a nova senha" value={senha} onChangeText={t => setSenha(t)} />
-                <Input placeholder="Confirme a senha" value={confirmarSenha} onChangeText={t => setConfirmarSenha(t)} />
+                <Input 
+                    placeholder="Digite a nova senha" 
+                    value={senha} 
+                    placeholderTextColor="#ddd"
+                    onChangeText={t => setSenha(t)}/> 
+                <Input 
+                    placeholder="Confirme a senha" 
+                    value={confirmarSenha} 
+                    placeholderTextColor="#ddd"
+                    onChangeText={t => setConfirmarSenha(t)} />
                 <BaseButton>
                     <Button color='#7bc26f' onPress={handleAlterarFecha} disabled={carregando}>
                         {carregando ? (

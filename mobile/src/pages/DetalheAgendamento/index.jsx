@@ -19,7 +19,7 @@ export default function DetalheAgendamento({route,navigation}) {
             </Header>
             <Section>
                 <Infor><Titulo>Data: </Titulo> {format(new Date(agendar.agendamento.data), 'MM/dd/yyyy')}</Infor>
-                <Infor><Titulo>Horário: </Titulo> {format(new Date(agendar.agendamento.data), 'H:mm')} h</Infor>
+                <Infor><Titulo>Horário: </Titulo> {agendar.agendamento.horario_para_chegar}h</Infor>
                 <Infor><Titulo>Status: </Titulo> {agendar.agendamento.status}</Infor>
                 <Descricao>{agendar.agendamento.descricao}</Descricao>
                 

@@ -89,7 +89,7 @@ export default function Painel() {
           <div>
             <BsCalendar2Check size={105} />
             <span>{data?.filter(i => i.confirmacao === true).length}</span>
-            <p>Q. de Eventos Agendado</p>
+            <p>Q. de Eventos Agendados</p>
           </div>
           <div>
             <MdOutlineLibraryMusic size={115} />
