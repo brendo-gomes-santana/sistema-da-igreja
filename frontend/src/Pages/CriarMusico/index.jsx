@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Header from '../../components/Header';
 import styles from './styles.module.scss';
 import api from '../../Service';
+import { tipos } from '../../Data';
 import { SchemaCadastrarMusico } from '../../validacao';
 
 export default function CriarMusica() {
@@ -61,8 +62,11 @@ export default function CriarMusica() {
                         <label>Tipo...: </label>
                         <select {...register('tipo')}>
                             <option value=''>Selecione o modelo</option>
-                            <option value='On Fire'>On fire</option>
-                            <option value='Geral'>Geral</option>
+                            {tipos.map((t) => {
+                                return(
+                                    <option key={t.id} value={t.t}>{t.t}</option>
+                                )
+                            })}
                         </select>
                     </div>
                     {errors.tipo && <span>{errors.tipo.message}</span>}

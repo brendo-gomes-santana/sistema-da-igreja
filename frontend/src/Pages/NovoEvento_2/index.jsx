@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useMutation, useQuery } from "react-query";
 import { useParams, Link } from "react-router-dom";
+import { tipos } from "../../Data";
 import { AiFillDelete, AiOutlineLoading3Quarters } from "react-icons/ai";
 import { motion } from "framer-motion";
 
@@ -101,8 +102,11 @@ export default function NovoEvento2() {
             disabled={handleCadastrarMusico.isLoading}
           >
             <option value=""></option>
-            <option value="On Fire">On Fire</option>
-            <option value="Geral">Geral</option>
+            {tipos.map((i) => {
+              return(
+                <option key={i.id} value={i.t}>{i.t}</option>
+              )
+            })}
           </select>
 
           <select

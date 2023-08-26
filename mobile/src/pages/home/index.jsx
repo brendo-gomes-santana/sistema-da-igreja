@@ -1,9 +1,11 @@
 import React, { useEffect, useContext, useState } from "react";
-import { FlatList, View, Text, ActivityIndicator, Button } from "react-native";
+import { FlatList, View, Text, ActivityIndicator } from "react-native";
+
 import api from '../../service';
 import { AuthContext } from '../../contexts/auth';
-import { Container } from "./styled";
 import ListAgendar from "../../components/ListAgendar";
+import { Container, Verificar, VerificarTitle, Base } from "./styled";
+
 export default function Home({ navigation }) {
 
     const { user } = useContext(AuthContext)
@@ -22,7 +24,7 @@ export default function Home({ navigation }) {
             }
         })()
     }, [])
-    async function handleVerificar(){
+    async function handleVerificar() {
         setLoading(true);
         try {
             const r = await api.get(`/agendar/musico?api_key=${process.env.EXPO_PUBLIC_API_KEY}&id=${user.id}`)
@@ -45,13 +47,21 @@ export default function Home({ navigation }) {
         return (
             <View style={{ alignItems: 'center', marginTop: 25 }}>
                 <Text style={{ fontSize: 18 }}>Você não possui agendamento</Text>
-                <Button title="Verificar" onPress={handleVerificar}/>
+                <Verificar onPress={handleVerificar}>
+                    <VerificarTitle>Atualizar</VerificarTitle>
+                </Verificar>
             </View>
         )
     }
 
     return (
         <Container>
+            <Base>
+            <Verificar onPress={handleVerificar}>
+                <VerificarTitle>Atualizar</VerificarTitle>
+            </Verificar>
+            </Base>
+
             <FlatList
                 data={agendas}
                 renderItem={({ item }) => <ListAgendar agendar={item} navigation={navigation} />}

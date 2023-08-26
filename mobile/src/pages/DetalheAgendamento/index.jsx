@@ -5,14 +5,14 @@ import { format } from 'date-fns';
 
 import ListLouvor from '../../components/ListLouvor';
 import { Container, Header, Button, Title, Section, Infor, Titulo, Descricao, TituloLouvor } from './styled'
-export default function DetalheAgendamento({route,navigation}) {
-    
+export default function DetalheAgendamento({ route, navigation }) {
+
     const { agendar } = route.params;
 
     return (
         <Container>
             <Header>
-                <Button onPress={ () => navigation.push('Home')}>
+                <Button onPress={() => navigation.push('Home')}>
                     <AntDesign name="back" size={24} color="black" />
                 </Button>
                 <Title>Detalhe do agendamento</Title>
@@ -22,11 +22,10 @@ export default function DetalheAgendamento({route,navigation}) {
                 <Infor><Titulo>Horário: </Titulo> {agendar.agendamento.horario_para_chegar}h</Infor>
                 <Infor><Titulo>Status: </Titulo> {agendar.agendamento.status}</Infor>
                 <Descricao>{agendar.agendamento.descricao}</Descricao>
-                
                 <TituloLouvor>Louvores</TituloLouvor>
-                <FlatList 
+                <FlatList
                     data={agendar.agendamento.louvorATocar}
-                    renderItem={ ({item}) => <ListLouvor louvor={item} navigation={navigation}/>}
+                    renderItem={({ item }) => <ListLouvor louvor={item} navigation={navigation} />}
                 />
 
             </Section>

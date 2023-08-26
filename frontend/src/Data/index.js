@@ -27,13 +27,15 @@ export const nota = [
 
 export const status = [
     { id: 1, s: 'Culto' },
-    { id: 2, s: 'Reunião de Discipulado' },
+    { id: 2, s: 'Reunião de D.' },
     { id: 3, s: 'OnFire' },
     { id: 4, s: 'Ensaio' },
     { id: 5, s: 'Evento' },
 ]
 
-export const tipo = [
-    {id: 1, t: 'Geral'},
-    {id: 2, t: 'Onfire'},
+export const tipos = [
+    {id: 1, t: 'Musico Geral'},
+    {id: 2, t: 'Musico Onfire'},
+    {id: 3, t: 'Média'},
+    {id: 4, t: 'Som'},
 ]

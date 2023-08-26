@@ -1,5 +1,5 @@
 import { NavigationContainer } from "@react-navigation/native";
-
+import { StatusBar } from "react-native";
 import Routes from "./src/routes";
 import AuthProvider from "./src/contexts/auth";
 import * as Notifications from 'expo-notifications';
@@ -17,6 +17,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <AuthProvider>
+        <StatusBar
+          backgroundColor='#1B3358'
+        />
         <Routes />
       </AuthProvider>
     </NavigationContainer>
