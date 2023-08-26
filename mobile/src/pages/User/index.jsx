@@ -23,11 +23,11 @@ export default function User() {
                 setCodigo(token);
                 setValidarCodigo(true);
                 setCarregando(false)
-                return 
+                return;
             } else {
                 setCarregando(false);
                 setValidarCodigo(false);
-                return 
+                return;
             }
 
         })()

@@ -11,7 +11,6 @@ export default function Home({ navigation }) {
     const [agendas, setAgendas] = useState([]);
 
     useEffect(() => {
-
         (async () => {
             try {
                 const r = await api.get(`/agendar/musico?api_key=${process.env.EXPO_PUBLIC_API_KEY}&id=${user.id}`)
@@ -23,7 +22,17 @@ export default function Home({ navigation }) {
             }
         })()
     }, [])
-
+    async function handleVerificar(){
+        setLoading(true);
+        try {
+            const r = await api.get(`/agendar/musico?api_key=${process.env.EXPO_PUBLIC_API_KEY}&id=${user.id}`)
+            setAgendas(r.data)
+        } catch (err) {
+            console.log(err.response.data.error)
+        } finally {
+            setLoading(false);
+        }
+    }
     if (loading) {
         return (
             <View style={{ marginTop: 25 }}>
@@ -36,6 +45,7 @@ export default function Home({ navigation }) {
         return (
             <View style={{ alignItems: 'center', marginTop: 25 }}>
                 <Text style={{ fontSize: 18 }}>Você não possui agendamento</Text>
+                <Button title="Verificar" onPress={handleVerificar}/>
             </View>
         )
     }
