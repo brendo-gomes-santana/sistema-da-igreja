@@ -46,6 +46,7 @@ export default function AuthProvider({ children }) {
             (async () => {
                 await AsyncStorage.setItem('@user', JSON.stringify(r.data))
             })()
+            
             setCarregarLogar(false);
         })
             .catch((err) => {

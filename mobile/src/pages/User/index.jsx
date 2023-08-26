@@ -1,11 +1,13 @@
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../contexts/auth";
-import { Alert, ActivityIndicator, View, Text } from "react-native";
+import { Alert, ActivityIndicator, View } from "react-native";
 import * as Notifications from 'expo-notifications';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import Model from "../../components/Model";
 import api from '../../service';
 import { Container, Title, Email, Button, TitleButton } from "./styles";
+
 export default function User() {
 
     const { user, deslogar, setUser } = useContext(AuthContext);
@@ -17,6 +19,7 @@ export default function User() {
 
     useEffect(() => {
         (async () => {
+            
             const token = (await Notifications.getExpoPushTokenAsync()).data;
 
             if (token !== user.codigo) {
@@ -34,7 +37,7 @@ export default function User() {
     }, [])
 
     async function handleAlterarCodigo(){
-
+        setCarregando(true);
         const { status } = await Notifications.getPermissionsAsync();
     
         if(status !== 'granted'){
@@ -51,19 +54,25 @@ export default function User() {
                 id_musico: user.id
             }
         })   
-
-        setUser({
+        let data = {
             id: r.data.id,
             nome: r.data.nome,
             email: r.data.email,
             token: user.id,
             codigo: codigo
 
-        }) 
+        }
+
+        await AsyncStorage.clear()
+        await AsyncStorage.setItem('@user', JSON.stringify(data))
+        setUser(data);
         setValidarCodigo(false);
+
       }catch(err){
         console.log(err)
-      } 
+      }finally{
+        setCarregando(false);
+      }
     }
         
     if (carregando) {
