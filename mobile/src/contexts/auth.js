@@ -63,6 +63,7 @@ export default function AuthProvider({ children }) {
             value={{
                 user,
                 logar,
+                setUser,
                 carregarLogar,
                 logado: !!user,
                 carregando,

@@ -6,32 +6,32 @@ class ConfirmarBandaService {
         if (!id_agendamento) {
             throw new Error('informe o id da agendar')
         }
+        const banda = await prisma.banda.findMany({ 
+            where: { id_agendamento },
+            include: {
+                musico: true,
+            } 
+        })
 
-        if (!await prisma.banda.findMany({ where: { id_agendamento } })) {
+        if (!banda) {
             throw new Error("não exite musico cadastrado nesse evento")
         }
-
+    
         const lista = await prisma.banda.updateMany({
             where: { id_agendamento },
             data: {
                 confirmacao
             }
         })
-
+        
         if (confirmacao) {
             // Crie uma instância do cliente Expo SDK
             let expo = new Expo();
 
-            // Tokens de notificação para os quais você deseja enviar
-            const pushTokens = [
-                'ExponentPushToken[0Ed-i6Hfy0yqnH6ssaFsfs]'
-            ];
-
             // Crie as mensagens que você deseja enviar para os clientes
-            let mensagem = pushTokens.map(pushToken => ({
-                to: pushToken,
-                body: 'Você possui um agendamento',
-                data: { withSome: 'data' }
+            let mensagem = banda?.map( b => ({
+                to: b?.musico?.codigo  === null ? ' ' : b?.musico?.codigo,
+                body: 'Você possui um agendamento'
             }));
 
             // Envie as mensagens de notificação
@@ -48,6 +48,7 @@ class ConfirmarBandaService {
             })();
 
         }
+    
         return lista;
     }
 }
