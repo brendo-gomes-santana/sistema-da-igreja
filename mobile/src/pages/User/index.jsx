@@ -6,7 +6,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import Model from "../../components/Model";
 import api from '../../service';
-import { Container, Title, Email, Button, TitleButton } from "./styles";
+import { Container, Title, Email, Button, TitleButton, Tipo } from "./styles";
 
 export default function User() {
 
@@ -19,7 +19,7 @@ export default function User() {
 
     useEffect(() => {
         (async () => {
-            
+
             const token = (await Notifications.getExpoPushTokenAsync()).data;
 
             if (token !== user.codigo) {
@@ -36,45 +36,51 @@ export default function User() {
         })()
     }, [])
 
-    async function handleAlterarCodigo(){
+    async function handleAlterarCodigo() {
         setCarregando(true);
-        const { status } = await Notifications.getPermissionsAsync();
-    
-        if(status !== 'granted'){
-            Alert.alert('Você não deu permissão para receber notificação')
+
+        const { status: existingStatus } = await Notifications.getPermissionsAsync();
+        let finalStatus = existingStatus;
+        if (existingStatus !== 'granted') {
+            const { status } = await Notifications.requestPermissionsAsync();
+            finalStatus = status;
+        }
+        if (finalStatus !== 'granted') {
+            Alert.alert('É necessário dar permissão para receber notificação');
+            setCarregando(false);
             return;
         }
-        
-      try{
-        const r = await api.patch('/update/musico', {
-            codigo: codigo
-        },{
-            params: {
-                api_key: process.env.EXPO_PUBLIC_API_KEY,
-                id_musico: user.id
+
+        try {
+            const r = await api.patch('/update/musico', {
+                codigo: codigo
+            }, {
+                params: {
+                    api_key: process.env.EXPO_PUBLIC_API_KEY,
+                    id_musico: user.id
+                }
+            })
+            let data = {
+                id: r.data.id,
+                nome: r.data.nome,
+                email: r.data.email,
+                token: user.id,
+                codigo: codigo
+
             }
-        })   
-        let data = {
-            id: r.data.id,
-            nome: r.data.nome,
-            email: r.data.email,
-            token: user.id,
-            codigo: codigo
 
+            await AsyncStorage.clear()
+            await AsyncStorage.setItem('@user', JSON.stringify(data))
+            setUser(data);
+            setValidarCodigo(false);
+
+        } catch (err) {
+            console.log(err)
+        } finally {
+            setCarregando(false);
         }
-
-        await AsyncStorage.clear()
-        await AsyncStorage.setItem('@user', JSON.stringify(data))
-        setUser(data);
-        setValidarCodigo(false);
-
-      }catch(err){
-        console.log(err)
-      }finally{
-        setCarregando(false);
-      }
     }
-        
+
     if (carregando) {
         return (
             <View style={{ marginTop: 25 }}>
@@ -85,7 +91,8 @@ export default function User() {
 
     return (
         <Container>
-            <Title>Olá {user.nome}</Title>
+            <Title>Olá, {user.nome}</Title>
+            <Tipo>{user.tipo}</Tipo>
             <Email>{user.email}</Email>
 
 

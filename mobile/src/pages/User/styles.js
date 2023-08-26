@@ -10,11 +10,16 @@ export const Title = styled.Text`
     font-weight: bold;
     color: #1B3358;
 
-    margin: 25px 0;
+    margin-top: 25px;
+`;
+export const Tipo = styled.Text`
+    font-size: 20px;
+    font-weight: bold;
+    color: #1B3358;
 `;
 
 export const Email = styled.Text`
-    margin-bottom: 30px;
+    margin:30px 0; 
     font-size: 18px;
 `;
 export const Button = styled.TouchableOpacity`

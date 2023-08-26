@@ -10,7 +10,12 @@
     "preview": {
       "distribution": "internal"
     },
-    "production": {}
+    "production": {
+      "env": {
+        "EXPO_PUBLIC_API_KEY": "SistemaDaIgreja",
+        "EXPO_PUBLIC_URL":"http://192.168.100.144:3333"
+      }
+    }
   },
   "submit": {
     "production": {}

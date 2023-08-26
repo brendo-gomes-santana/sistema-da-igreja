@@ -41,6 +41,7 @@ export default function AuthProvider({ children }) {
         }).then((r) => {
             const { token } = r.data;
             setUser(r.data)
+            console.log(r.data);
             api.defaults.headers['Authorization'] = `Bearer ${token}`;
 
             (async () => {
