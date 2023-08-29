@@ -10,7 +10,7 @@ class createLouvorATocarController {
         const inicializacao = new cretateLouvorATocarService()
         const criado = await inicializacao.execute({ id_agendamento, id_louvor })
 
-        return res.json(criado)
+        return res.status(200).send(criado)
     }
 }
 

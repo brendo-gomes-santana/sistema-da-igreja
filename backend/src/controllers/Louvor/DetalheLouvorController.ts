@@ -9,7 +9,7 @@ class DetalheLouvorController{
         const inicializacao = new detalheLouvorService()
         const detalhes = await inicializacao.execute(id)
 
-        return res.json(detalhes)
+        return res.status(200).send(detalhes)
 
     }
 }

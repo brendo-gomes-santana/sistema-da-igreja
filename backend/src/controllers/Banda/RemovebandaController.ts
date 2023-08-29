@@ -9,7 +9,7 @@ class RemoveBandaController{
         const inicializacao = new RemoveBandaService()
         const removido = await inicializacao.execute(id)
 
-        return res.json(removido)
+        return res.status(200).send(removido)
     }
 }
 

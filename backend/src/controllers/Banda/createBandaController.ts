@@ -7,7 +7,7 @@ class CreateBandaController {
 
         const inicializado = new CreateBandaService()
         const criado = await inicializado.execute(id_musico as string, id_agendamento as string)
-        return res.json(criado)
+        return res.status(200).send(criado)
     }
 }
 

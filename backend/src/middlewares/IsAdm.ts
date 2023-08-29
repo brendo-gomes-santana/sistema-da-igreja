@@ -6,7 +6,7 @@ export async function IsAdm(req: Request, res: Response, next: NextFunction){
 
 
     if(!id_adm){
-        return res.status(401).json({
+        return res.status(401).send({
             error: 'VocÇe não informou o id_adm'
         })
     }
@@ -17,7 +17,7 @@ export async function IsAdm(req: Request, res: Response, next: NextFunction){
 
 
     if(!isAdm){
-        return res.status(401).json({
+        return res.status(401).send({
             error: 'Você não faz parte da equipe de adm'
         })
 

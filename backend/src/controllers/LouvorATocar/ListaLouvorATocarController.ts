@@ -9,7 +9,7 @@ class ListaLouvorATocarController{
         const inicializacao = new ListaLouvorATocarService()
         const lista = await inicializacao.execute(id_agendamento)
 
-        return res.json(lista)
+        return res.status(200).send(lista)
     }
 }
 

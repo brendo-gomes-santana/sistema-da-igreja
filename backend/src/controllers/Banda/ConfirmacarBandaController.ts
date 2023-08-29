@@ -9,7 +9,7 @@ class ConfirmacarBandaController{
         const inicializacao = new ConfirmarBandaService();
         const atualizando = await inicializacao.execute(id_agendamento, confirmacao)
 
-        return res.json(atualizando)
+        return res.status(200).send(atualizando)
     }
 }
 

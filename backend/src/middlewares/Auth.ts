@@ -8,7 +8,7 @@ export function Jwt(
         const token = req.headers.authorization;
 
         if(!token){
-            return res.status(401).json({
+            return res.status(401).send({
                 error: 'Informe seu token'
             })
         }

@@ -10,7 +10,7 @@ class RemoveMusicoController{
         const inicializacao = new RemoveMusicoService()
         const removido = await inicializacao.execute(id_musico)
 
-        return res.json(removido)
+        return res.status(200).send(removido)
 
     }
 

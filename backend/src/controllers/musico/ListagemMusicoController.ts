@@ -9,7 +9,7 @@ class ListagemMusicoController{
         const inicializacao = new ListagemMusicoService()
         const lista = await inicializacao.execute(nome, tipo)
 
-        return res.json(lista)
+        return res.status(200).send(lista)
 
     }
 }

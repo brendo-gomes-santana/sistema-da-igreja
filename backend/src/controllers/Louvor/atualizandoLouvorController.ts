@@ -8,7 +8,7 @@ class atualizandoLouvorController{
         const inicializacao = new atualizarLouvorService()
         const atualizado = await inicializacao.execute({ id, letra, link, nome, tom })
 
-        return res.json(atualizado);
+        return res.status(200).send(atualizado);
     }
 }
 

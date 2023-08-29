@@ -21,7 +21,7 @@ class TrocaDeInformacoesMusicoController{
             codigo
         )
 
-        return res.json(atualizando)
+        return res.status(200).send(atualizando)
 
     }
 }

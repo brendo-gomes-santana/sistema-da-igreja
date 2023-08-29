@@ -7,7 +7,7 @@ class ListaLouvorController{
         const inicializacao = new ListaLouvorService();
         const lista = await inicializacao.execute()
 
-        return res.json(lista)
+        return res.status(200).send(lista)
 
     }
 }

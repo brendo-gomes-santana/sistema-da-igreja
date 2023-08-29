@@ -8,7 +8,7 @@ class ListaAgendamentoController{
         const inicializacao = new ListaAgendamentoService()
         const lista = await inicializacao.execute()
         
-        return res.json(lista)
+        return res.status(200).send(lista)
     }
 }
 export { ListaAgendamentoController }

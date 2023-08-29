@@ -9,7 +9,7 @@ class ListaBandaController{
         const inicializacao = new ListaBandaService()
         const lista = await inicializacao.execute(id_agendamento)
 
-        return res.json(lista)
+        return res.status(200).send(lista)
 
     }
 }

@@ -9,7 +9,7 @@ class detalheAgendamentoController{
         const inicializacao = new detalheAgendamentoService()
         const detalhe = await inicializacao.execute(id)
 
-        return res.json(detalhe)
+        return res.status(200).send(detalhe)
     }
 }
 

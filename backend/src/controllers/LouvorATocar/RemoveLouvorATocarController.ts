@@ -8,7 +8,7 @@ class RemoveLouvorATocarController{
         const inicializacao = new RemoveLouvorATocarService()
         const removido = await inicializacao.execute(id)
 
-        return res.json(removido)
+        return res.status(200).send(removido)
     }
 }
 

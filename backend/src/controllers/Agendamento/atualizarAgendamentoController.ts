@@ -21,7 +21,7 @@ class atualizarAgendamentoController{
             confirmacao
         })
 
-        return res.json(atualizado)
+        return res.status(200).send(atualizado)
     }
 }
 

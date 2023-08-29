@@ -9,7 +9,7 @@ class VerAgendarDoMusicoController{
         const inicializacao = new VerAgendarDoMusicoService();
         const lista = await inicializacao.execute(id)
 
-        return res.json(lista)
+        return res.status(200).send(lista)
     }
 }
 

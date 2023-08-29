@@ -9,7 +9,7 @@ class InformacoesAdmController{
         const inicializacao = new InformacoesAdmService()
         const dados = await inicializacao.execute(id_adm)
 
-        return res.json(dados)
+        return res.status(200).send(dados);
     }
 }
 

@@ -9,7 +9,7 @@ class CreateLouvorController{
         const inicializado = new createLouvorService();
         const criado = await inicializado.execute({ nome, letra, link, tom })
 
-        return res.json(criado);
+        return res.status(200).send(criado);
     }
 }
 export { CreateLouvorController }

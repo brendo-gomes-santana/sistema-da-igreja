@@ -14,7 +14,7 @@ class CreateMusicoController{
             tipo
         })
 
-        return res.json(criadoMusico)
+        return res.status(200).send(criadoMusico)
     }
 }
 

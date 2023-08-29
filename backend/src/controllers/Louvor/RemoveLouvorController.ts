@@ -9,7 +9,7 @@ class RemoveLouvorController{
 
         const removido = await inicializado.execute(id)
 
-        return res.json(removido)
+        return res.status(200).send(removido)
     }
 }
 

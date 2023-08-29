@@ -15,7 +15,7 @@ class SessionAdmController{
         const inicializacao = new SessionAdmService()
         const session = await inicializacao.execute(email, senha)
 
-        return res.json(session)
+        return res.status(200).send(session)
     }
 }
 

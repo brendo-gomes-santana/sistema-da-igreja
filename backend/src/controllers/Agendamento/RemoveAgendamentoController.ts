@@ -8,7 +8,7 @@ class RemoveAgendamentoController{
         const id = req.query.id as string
         const inicializado = new RemoveAgendamentoService()
         const removido = await inicializado.execute(id)
-        return res.json(removido)
+        return res.status(200).send(removido)
     }
 }
 export { RemoveAgendamentoController }

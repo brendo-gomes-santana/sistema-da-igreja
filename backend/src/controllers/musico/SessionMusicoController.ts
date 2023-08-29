@@ -14,7 +14,7 @@ class SessionMusicoController{
         const logado = await inicializacao.execute(email, senha)
 
 
-        return res.json(logado)
+        return res.status(200).send(logado)
     }
 }
 

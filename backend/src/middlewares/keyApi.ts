@@ -8,13 +8,13 @@ export function apiKey(req: Request, res: Response, next: NextFunction){
     const api_key = req.query.api_key as string
 
     if(!api_key){
-        return res.status(401).json({
+        return res.status(401).send({
             error: 'informe api_key'
         })
     }
 
     if(api_key !== process.env.API_KEY){
-        return res.status(401).json({
+        return res.status(401).send({
             error: 'Api_key incorreta'
         })
     }
