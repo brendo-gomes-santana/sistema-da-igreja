@@ -1,9 +1,9 @@
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors'
 import 'express-async-errors';
-
+import dotenv from 'dotenv';
 import { rota } from './routers';
-
+dotenv.config()
 const app = express()
 
 app.use(express.json())
@@ -24,6 +24,6 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     })
 })
 
-app.listen(3333, () => {
-    console.log('SISTEMA FUNCIONANDO')
+app.listen(process.env.PORTA, () => {
+    console.log(`SISTEMA DA FUNCIONANDO NA PORTA ${process.env.PORTA}`)
 })
