@@ -2,16 +2,12 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "parte lógica do projeto, aonde vai ter conexão com db e frontend.",
-  "main": "server.js",
+  "main": "index.js",
   "author": "Brendo Gomes Santana",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev src/index.ts",
-    "build": "tsc --project tsconfig.json",
-    "start": "node build/index.js"
-  },
-  "engines": {
-    "node": "16" 
+    "dev": "ts-node-dev src/server.ts",
+    "start": "node build/server.js"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",

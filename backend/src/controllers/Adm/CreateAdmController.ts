@@ -16,7 +16,7 @@ class CreateAdmController{
             codigo
         })
 
-        return res.json(criado)
+        return res.status(200).send(criado)
     }
 }
 

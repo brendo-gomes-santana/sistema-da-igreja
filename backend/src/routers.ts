@@ -33,48 +33,49 @@ import { ListaLouvorATocarController } from "./controllers/LouvorATocar/ListaLou
 import { RemoveLouvorATocarController } from "./controllers/LouvorATocar/RemoveLouvorATocarController";
 import { VerAgendarDoMusicoController } from "./controllers/musico/VerAgendarDoMusicoController";
 import { ConfirmacarBandaController } from "./controllers/Banda/ConfirmacarBandaController";
-const rota = Router()
 
-rota.use(apiKey)
-rota.post('/create/adm', new CreateAdmController().create)
-rota.post('/session/adm', new SessionAdmController().handle)
-rota.post('/session/musico', new SessionMusicoController().handle)
+const routes = Router();
 
-rota.use(Jwt)
-rota.patch('/update/adm', new TrocaInformacoesAdmController().atualizar)
-rota.get('/infor/adm', new InformacoesAdmController().handle)
+routes.use(apiKey)
+routes.post('/create/adm', new CreateAdmController().create)
+routes.post('/session/adm', new SessionAdmController().handle)
+routes.post('/session/musico', new SessionMusicoController().handle)
 
-//ROTAS MUSICO
-rota.post('/create/musico', IsAdm, new CreateMusicoController().create)
-rota.patch('/update/musico', new TrocaDeInformacoesMusicoController().update)
-rota.delete('/remove/musico', IsAdm, new RemoveMusicoController().handle)
-rota.post('/lista/musico', IsAdm, new ListagemMusicoController().show)
-rota.get('/agendar/musico', new VerAgendarDoMusicoController().handle)
+routes.use(Jwt)
+routes.patch('/update/adm', new TrocaInformacoesAdmController().atualizar)
+routes.get('/infor/adm', new InformacoesAdmController().handle)
 
-// ROTAS DE AGENDAMENTOS
-rota.post('/create/agendamento', IsAdm, new CreateAgendamentoController().create)
-rota.delete('/remove/agendamento', IsAdm, new RemoveAgendamentoController().remove)
-rota.get('/lista/agendamento', IsAdm, new ListaAgendamentoController().show)
-rota.get('/detalhe/agendamento', new detalheAgendamentoController().detalhe)
-rota.patch('/atualizando/agendamento', IsAdm, new atualizarAgendamentoController().handle)
+//routesS MUSICO
+routes.post('/create/musico', IsAdm, new CreateMusicoController().create)
+routes.patch('/update/musico', new TrocaDeInformacoesMusicoController().update)
+routes.delete('/remove/musico', IsAdm, new RemoveMusicoController().handle)
+routes.post('/lista/musico', IsAdm, new ListagemMusicoController().show)
+routes.get('/agendar/musico', new VerAgendarDoMusicoController().handle)
 
-// ROTAS DE BANDA 
-rota.post('/create/banda', IsAdm, new CreateBandaController().create)
-rota.get('/lista/banda', IsAdm, new ListaBandaController().show)
-rota.delete('/remove/banda', IsAdm, new RemoveBandaController().remove)
-rota.patch('/atualizando/banda', IsAdm, new ConfirmacarBandaController().handle)
+// routesS DE AGENDAMENTOS
+routes.post('/create/agendamento', IsAdm, new CreateAgendamentoController().create)
+routes.delete('/remove/agendamento', IsAdm, new RemoveAgendamentoController().remove)
+routes.get('/lista/agendamento', IsAdm, new ListaAgendamentoController().show)
+routes.get('/detalhe/agendamento', new detalheAgendamentoController().detalhe)
+routes.patch('/atualizando/agendamento', IsAdm, new atualizarAgendamentoController().handle)
 
-//ROTAS LOUVORES
-rota.post('/create/louvor', IsAdm, new CreateLouvorController().create)
-rota.delete('/remove/louvor', IsAdm, new RemoveLouvorController().remove)
-rota.get('/lista/louvor', IsAdm, new ListaLouvorController().show)
-rota.get('/detalhe/louvor', new DetalheLouvorController().handle)
-rota.patch('/atualizando/louvor', new atualizandoLouvorController().handle)
+// routesS DE BANDA 
+routes.post('/create/banda', IsAdm, new CreateBandaController().create)
+routes.get('/lista/banda', IsAdm, new ListaBandaController().show)
+routes.delete('/remove/banda', IsAdm, new RemoveBandaController().remove)
+routes.patch('/atualizando/banda', IsAdm, new ConfirmacarBandaController().handle)
+
+//routesS LOUVORES
+routes.post('/create/louvor', IsAdm, new CreateLouvorController().create)
+routes.delete('/remove/louvor', IsAdm, new RemoveLouvorController().remove)
+routes.get('/lista/louvor', IsAdm, new ListaLouvorController().show)
+routes.get('/detalhe/louvor', new DetalheLouvorController().handle)
+routes.patch('/atualizando/louvor', new atualizandoLouvorController().handle)
 
 
-//ROTAS LOUVORES A TOCAR
-rota.post('/create/agendamento/louvor', IsAdm, new createLouvorATocarController().handle)
-rota.get('/lista/agendamento/louvor', new ListaLouvorATocarController().handle)
-rota.delete('/remove/agendamento/louvor', IsAdm, new RemoveLouvorATocarController().delete)
+//routesS LOUVORES A TOCAR
+routes.post('/create/agendamento/louvor', IsAdm, new createLouvorATocarController().handle)
+routes.get('/lista/agendamento/louvor', new ListaLouvorATocarController().handle)
+routes.delete('/remove/agendamento/louvor', IsAdm, new RemoveLouvorATocarController().delete)
 
-export { rota }
+export { routes }
