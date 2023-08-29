@@ -4,14 +4,14 @@ import { View, ActivityIndicator } from "react-native";
 
 import Login from '../pages/Login';
 import RotasLogadas from "./auth.router";
-
+import SemInternet from "../pages/SemInternet";
 import { AuthContext } from "../contexts/auth";
 
 
 
 export default function Routes(){
 
-    const { logado, carregando } = useContext(AuthContext)
+    const { logado, carregando, conexao } = useContext(AuthContext)
 
     if(carregando){
         return(
@@ -25,7 +25,11 @@ export default function Routes(){
             </View>
         )     
     }
-
+    if(conexao){
+        return(
+            <SemInternet/>
+        )
+    }
     return(
         logado ? <RotasLogadas/> :  <Login/>
     )
