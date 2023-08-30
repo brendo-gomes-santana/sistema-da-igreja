@@ -19,16 +19,13 @@ export default function User() {
 
     useEffect(() => {
         (async () => {
-            setCarregando(true);
             const token = (await Notifications.getExpoPushTokenAsync()).data;
             if (token !== user.codigo) {
                 setCodigo(token);
                 setValidarCodigo(true);
-                setCarregando(false)
                 return;
             }
             setCarregando(false);
-            setValidarCodigo(false);
         })()
     }, [])
 
