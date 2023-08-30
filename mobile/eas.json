@@ -8,12 +8,23 @@
       "distribution": "internal"
     },
     "preview": {
-      "distribution": "internal"
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      }
+    },
+    "preview2": {
+      "android": {
+        "gradleCommand": ":app:assembleRelease"
+      }
+    },
+    "preview3": {
+      "developmentClient": true
     },
     "production": {
       "env": {
         "EXPO_PUBLIC_API_KEY": "SistemaDaIgreja",
-        "EXPO_PUBLIC_URL":"http://192.168.100.144:3333"
+        "EXPO_PUBLIC_URL":"https://sistema-da-igreja-production.up.railway.app"
       }
     }
   },

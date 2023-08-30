@@ -12,7 +12,7 @@ export default function DetalheAgendamento({ route, navigation }) {
     return (
         <Container>
             <Header>
-                <Button onPress={() => navigation.push('Home')}>
+                <Button onPress={() => navigation.goBack()}>
                     <AntDesign name="back" size={24} color="black" />
                 </Button>
                 <Title>Detalhe do agendamento</Title>

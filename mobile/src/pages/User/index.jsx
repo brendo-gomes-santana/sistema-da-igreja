@@ -15,24 +15,20 @@ export default function User() {
 
     const [codigo, setCodigo] = useState('');
     const [validarCodigo, setValidarCodigo] = useState(false);
-    const [carregando, setCarregando] = useState(true);
+    const [carregando, setCarregando] = useState(false);
 
     useEffect(() => {
         (async () => {
-
+            setCarregando(true);
             const token = (await Notifications.getExpoPushTokenAsync()).data;
-
             if (token !== user.codigo) {
                 setCodigo(token);
                 setValidarCodigo(true);
                 setCarregando(false)
                 return;
-            } else {
-                setCarregando(false);
-                setValidarCodigo(false);
-                return;
             }
-
+            setCarregando(false);
+            setValidarCodigo(false);
         })()
     }, [])
 
