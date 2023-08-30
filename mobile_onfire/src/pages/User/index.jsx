@@ -19,30 +19,34 @@ export default function User() {
 
     useEffect(() => {
         (async () => {
-            const token = (await Notifications.getExpoPushTokenAsync()).data;
-            if (token !== user.codigo) {
-                setCodigo(token);
-                setValidarCodigo(true);
-                return;
+            try {
+                const { status: existingStatus } = await Notifications.getPermissionsAsync();
+                let finalStatus = existingStatus;
+
+                if (existingStatus !== 'granted') {
+                    const { status } = await Notifications.requestPermissionsAsync();
+                    finalStatus = status;
+                }
+
+                if (finalStatus === 'granted') {
+                    const token = (await Notifications.getExpoPushTokenAsync()).data;
+                    if (token !== user.codigo) {
+                        setCodigo(token);
+                        setValidarCodigo(true);
+                    } else {
+                        setValidarCodigo(false);
+                    }
+                } else {
+                    Alert.alert('É necessário dar permissão para receber notificação');
+                }
+            } catch (error) {
+                console.error('Error while fetching or requesting notification permissions:', error);
             }
-            setValidarCodigo(false);
-        })()
-    }, [])
+        })();
+    }, []);
 
     async function handleAlterarCodigo() {
         setCarregando(true);
-
-        const { status: existingStatus } = await Notifications.getPermissionsAsync();
-        let finalStatus = existingStatus;
-        if (existingStatus !== 'granted') {
-            const { status } = await Notifications.requestPermissionsAsync();
-            finalStatus = status;
-        }
-        if (finalStatus !== 'granted') {
-            Alert.alert('É necessário dar permissão para receber notificação');
-            setCarregando(false);
-            return;
-        }
 
         try {
             const r = await api.patch('/update/musico', {
