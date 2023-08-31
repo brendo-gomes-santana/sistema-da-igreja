@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../contexts/auth";
-import { Alert, ActivityIndicator, View } from "react-native";
-import * as Notifications from 'expo-notifications';
+import { ActivityIndicator, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import Model from "../../components/Model";
@@ -14,36 +13,10 @@ export default function User() {
     const [ativoModel, setAtivoModel] = useState(false);
 
     const [codigo, setCodigo] = useState('');
-    const [validarCodigo, setValidarCodigo] = useState(false);
+    const [validarCodigo, setValidarCodigo] = useState(true);
     const [carregando, setCarregando] = useState(false);
+    const [token, setToken] = useState('');
 
-    useEffect(() => {
-        (async () => {
-            try {
-                const { status: existingStatus } = await Notifications.getPermissionsAsync();
-                let finalStatus = existingStatus;
-
-                if (existingStatus !== 'granted') {
-                    const { status } = await Notifications.requestPermissionsAsync();
-                    finalStatus = status;
-                }
-
-                if (finalStatus === 'granted') {
-                    const token = (await Notifications.getExpoPushTokenAsync()).data;
-                    if (token !== user.codigo) {
-                        setCodigo(token);
-                        setValidarCodigo(true);
-                    } else {
-                        setValidarCodigo(false);
-                    }
-                } else {
-                    Alert.alert('É necessário dar permissão para receber notificação');
-                }
-            } catch (error) {
-                console.error('Error while fetching or requesting notification permissions:', error);
-            }
-        })();
-    }, []);
 
     async function handleAlterarCodigo() {
         setCarregando(true);
@@ -89,8 +62,8 @@ export default function User() {
     return (
         <Container>
             <Title>Olá, {user.nome}</Title>
-            <Tipo>{user.tipo}</Tipo>
-            <Email>{user.email}</Email>
+            <Tipo>{user.tipo} / {token}</Tipo>
+            <Email>{user.email} /{user.codigo === null && 'deu null'}</Email>
 
 
             <Button onPress={() => setAtivoModel(true)} color='#7bc26f'>
