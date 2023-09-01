@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "629587682948",
+    "project_id": "notificacoes-76644",
+    "storage_bucket": "notificacoes-76644.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:629587682948:android:6a5902d1a00819d52804d1",
+        "android_client_info": {
+          "package_name": "com.brendo_gomes.Mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "629587682948-k3eec6hrsft4f9bmuunou8pkl46nh3vk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.brendo_gomes.Mobile",
+            "certificate_hash": "4facb0706162956f9e2bed0164a8abf8dd48bfb3"
+          }
+        },
+        {
+          "client_id": "629587682948-rodmb2bgfjs8c0b87s8l6ocm989a5nr7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.brendo_gomes.Mobile",
+            "certificate_hash": "e60e3435b7a98e64708e8712769d34594cbc74d0"
+          }
+        },
+        {
+          "client_id": "629587682948-afk2smo6j873klp23a6jldmg6d9215uv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDz0cwUtYDjW3XpzUVbHGZjM33pHDUoS74"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "629587682948-afk2smo6j873klp23a6jldmg6d9215uv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
