@@ -1,7 +1,9 @@
 import prisma from "../../prisma"
-import { Expo } from 'expo-server-sdk';
 import { format } from 'date-fns';
+import FCM from 'fcm-node';
+import { config } from "dotenv";
 
+config();
 class ConfirmarBandaService {
     async execute(id_agendamento: string, confirmacao: boolean) {
         if (!id_agendamento) {
@@ -26,29 +28,26 @@ class ConfirmarBandaService {
         })
 
         if (confirmacao) {
-            // Crie uma instância do cliente Expo SDK
-            let expo = new Expo();
+            const fcm = new FCM(process.env.CHAVE)
 
-            // Crie as mensagens que você deseja enviar para os clientes
-            let mensagem = banda?.map(b => ({
-                to: b?.musico?.codigo === null ? ' ' : b?.musico?.codigo,
-                title: `Você possui um agendamento`,
-                body: `Agendamento para o dia ${format(new Date(b.agendamento.data), 'dd/MM/yyyy')} às ${b.agendamento.horario_para_chegar}h.`
-            }));
-
-            // Envie as mensagens de notificação
-            (async () => {
-                try {
-                    let chunks = expo.chunkPushNotifications(mensagem);
-                    for (let chunk of chunks) {
-                        let ticketChunk = await expo.sendPushNotificationsAsync(chunk);
-                        console.log('Tickets:', ticketChunk);
+            banda?.forEach((b) => {
+                var message = { 
+                    to: b?.musico?.codigo === null ? ' ' : b?.musico?.codigo, 
+                    
+                    notification: {
+                        title: `Você possui um agendamento`,
+                        body: `Agendamento para o dia ${format(new Date(b.agendamento.data), 'dd/MM/yyyy')} às ${b.agendamento.horario_para_chegar}h.`
+                    },
+                };
+                
+                fcm.send(message, function(err: Error, response: any){
+                    if (err) {
+                        console.log("Algo Deu errado");
+                    } else {
+                        console.log("Mensagem Enviada", response);
                     }
-                } catch (error) {
-                    console.error('Erro:', error);
-                }
-            })();
-
+                }); 
+            })
         }
 
         return lista;

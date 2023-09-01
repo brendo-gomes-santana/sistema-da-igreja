@@ -1,0 +1,84 @@
+.container {
+  padding: 1rem 1rem 0 290px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.title {
+  width: 100%;
+  height: 69px;
+  border: 1px solid var(--cinza-100);
+  margin-bottom: 47px;
+  border-radius: 63px;
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  font-size: 25px;
+}
+.title a {
+  width: 100px;
+  height: 38px;
+  background-color: var(--vermelho-claro);
+  color: var(--branco);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 63px;
+  margin-right: 1rem;
+}
+
+.form {
+  width: 90%;
+  height: 600px;
+  border: 5px solid var(--fundo);
+  border-radius: 63px;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.form .data_horario_select {
+  margin-bottom: 0.5rem;
+}
+.form .data_horario_select label {
+  font-size: 20px;
+  font-weight: bold;
+}
+.form .data_horario_select input, .form .data_horario_select select {
+  width: 254px;
+  height: 50px;
+  padding: 0 0.5rem;
+  margin-left: 0.5rem;
+}
+.form .label_textarea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+.form .label_textarea label {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 0.2rem;
+}
+.form .label_textarea textarea {
+  width: 80%;
+  height: 300px;
+  resize: none;
+  font-size: 18px;
+  padding: 0.5rem;
+}
+.form #button {
+  width: 123px;
+  height: 37px;
+  border-radius: 63px;
+  border: 0;
+  background-color: var(--verde-mais-forte);
+  margin: 0 auto;
+  color: var(--branco);
+  font-weight: bold;
+  font-size: 20px;
+  cursor: pointer;
+}/*# sourceMappingURL=styles.module.css.map */
