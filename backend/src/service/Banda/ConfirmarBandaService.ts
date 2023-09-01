@@ -31,7 +31,7 @@ class ConfirmarBandaService {
             const fcm = new FCM(process.env.CHAVE)
 
             banda?.forEach((b) => {
-                var message = { 
+                const message = { 
                     to: b?.musico?.codigo === null ? ' ' : b?.musico?.codigo, 
                     
                     notification: {
