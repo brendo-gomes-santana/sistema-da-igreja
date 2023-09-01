@@ -16,8 +16,8 @@ exports.ConfirmarBandaService = void 0;
 const prisma_1 = __importDefault(require("../../prisma"));
 const date_fns_1 = require("date-fns");
 const fcm_node_1 = __importDefault(require("fcm-node"));
-const dotenv_1 = require("dotenv");
-(0, dotenv_1.config)();
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 class ConfirmarBandaService {
     execute(id_agendamento, confirmacao) {
         return __awaiter(this, void 0, void 0, function* () {
