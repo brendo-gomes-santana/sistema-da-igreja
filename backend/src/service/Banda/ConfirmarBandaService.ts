@@ -1,6 +1,7 @@
 import prisma from "../../prisma"
 import { format } from 'date-fns';
 import FCM from 'fcm-node';
+
 import { config } from "dotenv";
 
 config();
@@ -28,7 +29,8 @@ class ConfirmarBandaService {
         })
 
         if (confirmacao) {
-            const fcm = new FCM(process.env.CHAVE)
+            const Api_Key = process.env.CHAVE as string;
+            const fcm = new  FCM(Api_Key)
 
             banda?.forEach((b) => {
                 const message = { 
