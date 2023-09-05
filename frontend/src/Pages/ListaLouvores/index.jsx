@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQuery, useMutation } from 'react-query';
+import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { AiFillDelete } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { FaEye } from 'react-icons/fa';
@@ -11,8 +11,9 @@ import api from '../../Service';
 
 export default function ListaLouvores() {
     const adm = JSON.parse(localStorage.getItem('@InforUser'))
+    const queryClient = useQueryClient();
 
-    const { data, isLoading, refetch } = useQuery('Lista-louvores', async () => {
+    const { data, isLoading } = useQuery('Lista-louvores', async () => {
         return api.get('/lista/louvor', {
             params: {
                 id_adm: adm.id,
@@ -29,10 +30,10 @@ export default function ListaLouvores() {
                     api_key: process.env.React_App_API_KEY,
                     id: id
                 }  
-            })
+            }).then((r) => r.data);
         },
-        onSuccess: () => {
-            refetch()
+        onSuccess: (data) => {
+            console.log(data) //CONTINUA AQUI, AQUI VOCÊ NÃO FEZ, FOI AONDE PAROU.
         }
     }) 
     return (

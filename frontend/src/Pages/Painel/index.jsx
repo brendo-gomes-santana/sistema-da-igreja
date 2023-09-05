@@ -1,5 +1,5 @@
 import React from 'react'
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useNavigate, Link } from 'react-router-dom';
 
 import { PiUsersThreeFill } from 'react-icons/pi';
@@ -19,13 +19,13 @@ import Loading from '../../components/Loading';
 export default function Painel() {
   const adm = JSON.parse(localStorage.getItem('@InforUser'))
   const navigate = useNavigate();
-
+  const queryClient = useQueryClient();
   //pegando a lista de agendamento
-  const { data, isLoading, refetch } = useQuery('agendar', async () => {
+  const { data, isLoading } = useQuery('agendar', async () => {
     return api.get('/lista/agendamento', {
       params: {
         id_adm: adm.id,
-        api_key: 'SistemaDaIgreja'
+        api_key: process.env.React_App_API_KEY
       }
     }).then((r) => r.data)
   })
@@ -33,7 +33,7 @@ export default function Painel() {
     return api.post('/lista/musico',{},{
       params: {
         id_adm: adm.id,
-        api_key: 'SistemaDaIgreja'
+        api_key: process.env.React_App_API_KEY
       }
     }).then((r) => r.data)
   })
@@ -42,7 +42,7 @@ export default function Painel() {
     return api.get('/lista/louvor', {
       params: {
         id_adm: adm.id,
-        api_key: 'SistemaDaIgreja'
+        api_key: process.env.React_App_API_KEY
       }
     }).then((r) => r.data)
   })
@@ -52,13 +52,13 @@ export default function Painel() {
       return api.delete('/remove/agendamento', {
         params: {
           id_adm: adm.id,
-          api_key: 'SistemaDaIgreja',
+          api_key: process.env.React_App_API_KEY,
           id
         }
       }).then((r) => r.data)
     },
-    onSuccess: () => {
-      refetch()
+    onSuccess: (data) => {
+      queryClient.setQueryData("agendar", (antigaData) => antigaData.filter((agen) => agen.id !== data.id));
     }
   })
 
@@ -71,6 +71,7 @@ export default function Painel() {
       <Loading/>
     )
   }
+  
   return (
     <>
       <Header administrador={true}/>
