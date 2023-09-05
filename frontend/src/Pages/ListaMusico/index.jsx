@@ -1,6 +1,6 @@
 import React from 'react'
+import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { AiFillDelete } from 'react-icons/ai';
-import { useQuery, useMutation } from 'react-query';
 import { motion } from 'framer-motion';
 
 import Header from '../../components/Header';
@@ -10,8 +10,9 @@ import api from '../../Service';
 export default function ListaMusico() {
 
     const adm = JSON.parse(localStorage.getItem('@InforUser'))
+    const queryClient = useQueryClient();
 
-    const { data, isLoading, refetch } = useQuery('lista-musicos', async () => {
+    const { data, isLoading } = useQuery('lista-musicos', async () => {
         return api.post('/lista/musico', {}, {
             params: {
                 api_key: process.env.React_App_API_KEY,
@@ -30,8 +31,8 @@ export default function ListaMusico() {
                 }
             }).then((r) => r.data)
         },
-        onSuccess: () => {
-            refetch()
+        onSuccess: (data) => {
+            queryClient.setQueryData("lista-musicos", (antigaData) => antigaData.filter((musico) => musico.id !== data.id));
         }
     })
 

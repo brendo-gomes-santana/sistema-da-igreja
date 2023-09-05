@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { useQuery, useMutation } from "react-query";
+import { useQuery, useMutation, useQueryClient } from "react-query";
 import { AiOutlineLoading3Quarters, AiFillDelete } from "react-icons/ai";
 import { motion } from "framer-motion";
 
@@ -10,6 +10,8 @@ import api from "../../Service";
 
 export default function NovoEvento3() {
   const { id_agendamento } = useParams();
+  const queryClient = useQueryClient();
+
   const usuario = JSON.parse(localStorage.getItem("@InforUser"));
   const [idLouvor, setIdLouvor] = useState("");
   const [loading, setLoading] = useState("");
@@ -24,7 +26,8 @@ export default function NovoEvento3() {
       })
       .then((r) => r.data);
   });
-  const { data: louvoresATocar, refetch } = useQuery(
+
+  const { data: louvoresATocar } = useQuery(
     "louvoresAAtocar",
     async () => {
       return api
@@ -56,8 +59,8 @@ export default function NovoEvento3() {
         )
         .then((r) => r.data);
     },
-    onSuccess: () => {
-      refetch();
+    onSuccess: (data) => {
+      queryClient.setQueryData("louvoresAAtocar", (dataAtual) => [...dataAtual, data])
     },
   });
 
@@ -73,11 +76,10 @@ export default function NovoEvento3() {
         })
         .then((r) => r.data);
     },
-    onSuccess: () => {
-      refetch();
+    onSuccess: (data) => {
+      queryClient.setQueryData("louvoresAAtocar", (dataAtual) => dataAtual.filter((louvor) => louvor.id !== data.id));
     },
   });
-
   return (
     <>
       <Header administrador={true} />

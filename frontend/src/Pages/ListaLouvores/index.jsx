@@ -33,7 +33,7 @@ export default function ListaLouvores() {
             }).then((r) => r.data);
         },
         onSuccess: (data) => {
-            console.log(data) //CONTINUA AQUI, AQUI VOCÊ NÃO FEZ, FOI AONDE PAROU.
+             queryClient.setQueryData("Lista-louvores", (antigaData) => antigaData.filter((infor) => infor.id !== data.id));
         }
     }) 
     return (

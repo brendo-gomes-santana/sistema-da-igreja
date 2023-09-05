@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useParams, Link } from "react-router-dom";
 import { tipos } from "../../Data";
 import { AiFillDelete, AiOutlineLoading3Quarters } from "react-icons/ai";
@@ -10,6 +10,7 @@ import styles from "./styles.module.scss";
 import api from "../../Service";
 
 export default function NovoEvento2() {
+  const queryClient = useQueryClient();
   const usuario = JSON.parse(localStorage.getItem("@InforUser"));
   const { id_agendamento } = useParams();
 
@@ -17,6 +18,7 @@ export default function NovoEvento2() {
   const [tipo, setTipo] = useState("");
   const [id, setId] = useState("");
   const [loadingPorid, setLoadingPorId] = useState('')
+ 
   useEffect(() => {
     (async () => {
       await api
@@ -53,12 +55,12 @@ export default function NovoEvento2() {
         )
         .then((r) => r.data);
     },
-    onSuccess: () => {
-      refetch();
+    onSuccess: (data) => {
+      queryClient.setQueryData("banda", (dataAtual) => [...dataAtual, data]);
     },
   });
 
-  const { data, refetch } = useQuery("banda", async () => {
+  const { data } = useQuery("banda", async () => {
     return api
       .get("/lista/banda", {
         params: {
@@ -82,10 +84,11 @@ export default function NovoEvento2() {
         })
         .then((r) => r.data);
     },
-    onSuccess: () => {
-      refetch();
+    onSuccess: (data) => {
+      queryClient.setQueryData("banda", (antigaData) => antigaData.filter((banda) => banda.id !== data.id));
     },
   });
+
   return (
     <>
       <Header administrador={true} />
